@@ -4,6 +4,7 @@ from backend.db_connection import db
 from backend.simple.playlist import sample_playlist_data
 
 # This blueprint handles some basic routes that you can use for testing
+    # collection of routes in flask - group of routes w common name
 simple_routes = Blueprint('simple_routes', __name__)
 
 
