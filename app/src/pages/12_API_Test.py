@@ -33,6 +33,14 @@ except:
   data3 = [{"a": "123", "b": "hello"}, {"a": "456", "b": "goodbye"}]
 st.dataframe(data3)
 
+data33 = {}
+try:
+  data33 = requests.get('http://api:4000/3/notes/2').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  data33 = [{"a": "123", "b": "hello"}, {"a": "456", "b": "goodbye"}]
+st.dataframe(data33)
+
 data35 = {}
 try:
   data35 = requests.get('http://api:4000/3/ratings/1').json()

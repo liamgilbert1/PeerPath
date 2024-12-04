@@ -27,7 +27,13 @@ def get_ratings():
 @persona3.route('/notes/<int:decisionmakerID>', methods=['GET'])
 def get_notes(decisionmakerID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM notes WHERE decisionmaker_id = %s', (decisionmakerID,))
+    sql_query = '''
+        SELECT *
+        FROM notes
+        WHERE (coordinator_id = %s OR %s IS NULL)
+        AND (employer_id = %s OR %s IS NULL);
+    '''
+    cursor.execute(sql_query, (decisionmakerID, decisionmakerID, None, None))
     
     theData = cursor.fetchall()
     
@@ -38,10 +44,18 @@ def get_notes(decisionmakerID):
     the_response.status_code = 200
     return the_response
 
+
+
 @persona3.route('/ratings/<int:coordinatorID>', methods=['GET'])
 def get_ratings_by_coordinator(coordinatorID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM rating JOIN user ON rating.user_id = user.user_id WHERE user.coordinator = %s', (coordinatorID,))
+    sql_query = '''
+        SELECT * 
+        FROM rating 
+        JOIN user ON rating.user_id = user.user_id 
+        WHERE user.coordinator = %s;'''
+    
+    cursor.execute(sql_query, (coordinatorID,))
     
     theData = cursor.fetchall()
     
