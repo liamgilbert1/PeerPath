@@ -10,6 +10,24 @@ from backend.db_connection import db
 # routes.
 persona3 = Blueprint('persona3', __name__)
 
+
+@persona3.route('/users', methods=['GET'])
+def get_users():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM user')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "RIP"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+
+
+
 @persona3.route('/ratings', methods=['GET'])
 def get_ratings():
     cursor = db.get_db().cursor()
@@ -43,7 +61,6 @@ def get_notes(decisionmakerID):
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
-
 
 
 @persona3.route('/ratings/<int:coordinatorID>', methods=['GET'])
