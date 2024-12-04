@@ -46,7 +46,7 @@ def update_profile(username, email, activity_status, urgency_status, search_stat
       json={"username": username, "email": email, "activity_status": activity_status, "urgency_status": urgency_status, "search_status": search_status}
     )
     if response.status_code == 200:
-      st.success("First name updated successfully!")
+      st.success("Profile updated successfully!")
     else:
       st.error("Failed to update profile.")
   except Exception as e:
