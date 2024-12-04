@@ -30,3 +30,27 @@ def get_user(userID):
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+
+#------------------------------------------------------------
+# Retrieves all of the advice given for {roleID}
+
+#------------------------------------------------------------
+# Retrieves list of resources recommended by {userID}
+
+#------------------------------------------------------------
+# Retrieves list of ratings made for {employerID}
+
+#------------------------------------------------------------
+#Retrieves list of reviews made for {employerID}
+
+#------------------------------------------------------------
+# Update mutable attributes of user with {userID}
+
+#------------------------------------------------------------
+# Retrieve all friends of {userID}
+
+#------------------------------------------------------------
+# Add a new friend of {friendID} for {userID}
+
+#------------------------------------------------------------
+# Remove friend of {friendID} for {userID}
