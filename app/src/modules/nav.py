@@ -17,7 +17,7 @@ def AboutPageNav():
 #### ------------------------ Examples for Role of pol_strat_advisor ------------------------
 def PolStratAdvHomeNav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/Jerry_Home.py", label="Jerry's Home Page", icon="👤"
     )
 
 
@@ -74,7 +74,7 @@ def SideBarLinks(show_home=False):
         # Show the Home page link (the landing page)
         HomeNav()
 
-    # Show the other page navigators depending on the users' role.
+    # Show the other page navigators depending on the id of the user/coordinator/system admin
     if st.session_state["authenticated"]:
 
         # Show ___ and ___ if the user_id = 1.
