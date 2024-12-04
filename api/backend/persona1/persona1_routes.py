@@ -14,23 +14,6 @@ from backend.db_connection import db
 # routes.
 persona1 = Blueprint('persona1', __name__)
 
-
-#------------------------------------------------------------
-# Get specific user from the system
-@persona1.route('/user/<int:userID>', methods=['GET'])
-def get_user(userID):
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM user WHERE user_id = %s', (userID,))
-    
-    theData = cursor.fetchall()
-    
-    if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
-    
-    the_response = make_response(jsonify(theData))
-    the_response.status_code = 200
-    return the_response
-
 #------------------------------------------------------------
 # Retrieves all of the advice given for {roleID}
 @persona1.route('/advice/<int:roleID>', methods=['GET'])
@@ -96,10 +79,29 @@ def get_employer_reviews(employerID):
     return the_response
 
 # #------------------------------------------------------------
-# # Update mutable attributes of user with {userID}
-# @persona1.route('/user/<int:userID>', methods=['PUT'])
-# def todo():
-#     return
+# Update mutable attributes of user with {userID}
+@persona1.route('/user/<int:userID>', methods=['PUT'])
+def update_user(userID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM user WHERE user_id = %s', (userID,))
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "User not found"}), 404)
+    
+    user_info = request.json
+    username = user_info['username']
+    email = user_info['email']
+    activity_status = user_info['activity_status']
+    urgency_status = user_info['urgency_status']
+    search_status = user_info['search_status']
+    
+    query = 'UPDATE user SET username = %s, email = %s, activity_status = %s, urgency_status = %s, search_status = %s WHERE user_id = %s'
+    data = (username, email, activity_status, urgency_status, search_status, userID)
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return 'user updated!'
 
 # #------------------------------------------------------------
 # # Retrieve all friends of {userID}
