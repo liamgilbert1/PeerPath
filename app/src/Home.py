@@ -80,8 +80,8 @@ if st.button('Act as Stacy, a co-op coordinator',
     st.session_state['authenticated'] = True
     st.session_state['coordinator_id'] = 1
     st.session_state['first_name'] = 'Stacy'
-    # TODO - update page name
-    st.switch_page('pages/20_Admin_Home.py')
+    # TODO - bring to new coordinator home page
+    st.switch_page('pages/Coordinator_Home.py')
 
 if st.button('Act as Phil, a system administrator', 
             type = 'primary', 
