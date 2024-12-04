@@ -125,10 +125,34 @@ def update_user(userID):
 #     return
 
 # #------------------------------------------------------------
-# # Add a new friend of {friendID} for {userID}
-# @persona1.route('/user/<int:userID>/friends/<int:friendID>', methods=['POST'])
-# def todo():
-#     return
+# Add a new friend of {friend_username} for {userID}
+@persona1.route('/user/<int:userID>/friends/<string:friend_username>', methods=['POST'])
+def add_friend(userID, friend_username):
+
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT user_id FROM user WHERE username = %s', (friend_username,))
+    friend_data = cursor.fetchall()
+
+    if not friend_data:
+        return make_response(jsonify({"error": "Friend username does not exist"}), 404)
+
+    friendID = friend_data[0]['user_id'] if friend_data else None
+
+    if friendID is None:
+        return 'User not found, try a different username!'
+
+    cursor.execute('SELECT * FROM friendship WHERE user_id = %s AND friend_id = %s', (userID, friendID))
+    
+    theData = cursor.fetchall()
+    
+    if theData:
+        return make_response(jsonify({"error": "Friend already exists"}), 404)
+    
+    query = 'INSERT INTO friendship (user_id, friend_id) VALUES (%s, %s)'
+    data = (userID, friendID)
+    cursor.execute(query, data)
+    db.get_db().commit()
+    return 'friend added!'
 
 # #------------------------------------------------------------
 # # Remove friend of {friendID} for {userID}
