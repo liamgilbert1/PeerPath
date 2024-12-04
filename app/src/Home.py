@@ -61,8 +61,7 @@ if st.button("Act as Jerry, a 2nd year student searching for his 1st co-op",
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
     logger.info("Logging in as Jerry (First Time Co-op Persona)")
-    # TODO - update page name
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+    st.switch_page('pages/Jerry_Home.py')
 
 if st.button('Act as Jordan, a 4th year finishing his second co-op', 
             type = 'primary', 
@@ -70,9 +69,7 @@ if st.button('Act as Jordan, a 4th year finishing his second co-op',
     st.session_state['authenticated'] = True
     st.session_state['user_id'] = 2
     st.session_state['first_name'] = 'Jordan'
-
-    # TODO - update page name
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.switch_page('pages/Jordan_Home.py')
 
 if st.button('Act as Stacy, a co-op coordinator', 
             type = 'primary', 
@@ -80,8 +77,7 @@ if st.button('Act as Stacy, a co-op coordinator',
     st.session_state['authenticated'] = True
     st.session_state['coordinator_id'] = 1
     st.session_state['first_name'] = 'Stacy'
-    # TODO - bring to new coordinator home page
-    st.switch_page('pages/Coordinator_Home.py')
+    st.switch_page('pages/Stacy_Home.py')
 
 if st.button('Act as Phil, a system administrator', 
             type = 'primary', 
@@ -89,5 +85,4 @@ if st.button('Act as Phil, a system administrator',
     st.session_state['authenticated'] = True
     st.session_state['admin_id'] = 1
     st.session_state['first_name'] = 'Phil'
-    # TODO - update page name
-    st.switch_page('pages/20_Admin_Home.py')
+    st.switch_page('pages/Phil_Home.py')
