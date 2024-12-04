@@ -13,6 +13,12 @@ logger = logging.getLogger(__name__)
 import streamlit as st
 from modules.nav import SideBarLinks
 
+st.session_state['authenticated'] = False
+st.session_state['user_id'] = None
+st.session_state['first_name'] = None
+st.session_state['coordinator_id'] = None
+st.session_state['admin_id'] = None
+
 # streamlit supports reguarl and wide layout (how the controls
 # are organized/displayed on the screen).
 st.set_page_config(layout = 'wide')
@@ -64,6 +70,7 @@ if st.button('Act as Jordan, a 4th year finishing his second co-op',
     st.session_state['authenticated'] = True
     st.session_state['user_id'] = 2
     st.session_state['first_name'] = 'Jordan'
+
     # TODO - update page name
     st.switch_page('pages/10_USAID_Worker_Home.py')
 
