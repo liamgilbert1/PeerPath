@@ -83,14 +83,14 @@ def SideBarLinks(show_home=False):
             WorldBankVizNav()
             MapDemoNav()
 
-        # If the user id = 2, show ____
+        # If the user id = 2, show ____.
         if st.session_state["user_id"] == 2:
             PredictionNav()
             ApiTestNav()
             ClassificationNav()
 
-        # If the user is an administrator, give them access to the administrator pages
-        if st.session_state["role"] == "administrator":
+        # If the coordinator id is 1, show ___.
+        if st.session_state["coordinator_id"] == 1:
             AdminPageNav()
 
     # Always show the About page at the bottom of the list of links
