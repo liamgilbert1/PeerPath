@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS notes (
 SHOW TABLES;
 
 
-insert into system_admin (admin_id, first_name, last_name, username, email, phone_number) values (1, 'Samantha', 'Tabor', 'stabor0', 'stabor0@ted.com', '(450) 4210818');
+insert into system_admin (admin_id, first_name, last_name, username, email, phone_number) values (1, 'Phil', 'Stern', 'pstern', 'pstern@ted.com', '(450) 4210818');
 insert into system_admin (admin_id, first_name, last_name, username, email, phone_number) values (2, 'Stephannie', 'Glaserman', 'sglaserman1', 'sglaserman1@sourceforge.net', '(127) 1404608');
 insert into system_admin (admin_id, first_name, last_name, username, email, phone_number) values (3, 'Pip', 'Orae', 'porae2', 'porae2@wikia.com', '(291) 3065036');
 insert into system_admin (admin_id, first_name, last_name, username, email, phone_number) values (4, 'Weylin', 'Brearley', 'wbrearley3', 'wbrearley3@dailymail.co.uk', '(620) 8178327');
