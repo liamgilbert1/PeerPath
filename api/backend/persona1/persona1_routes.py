@@ -65,9 +65,19 @@ def get_user_resources(userID):
 
 # #------------------------------------------------------------
 # # Retrieves list of ratings made for {employerID}
-# @persona1.route('/ratings/<int:employerID>', methods=['GET'])
-# def todo():
-#     return
+@persona1.route('/ratings/<int:employerID>', methods=['GET'])
+def get_employer_ratings(employerID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM rating ra JOIN role ro ON ra.role_id = ro.role_id WHERE ro.employer = %s', (employerID,))
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve ratings for the employer"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
 
 # #------------------------------------------------------------
 # #Retrieves list of reviews made for {employerID}
