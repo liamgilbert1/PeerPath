@@ -49,9 +49,19 @@ def get_role_advice(roleID):
 
 # #------------------------------------------------------------
 # # Retrieves list of resources recommended by {userID}
-# @persona1.route('/resources/<int:userID>', methods=['GET'])
-# def todo():
-#     return
+@persona1.route('/resources/<int:userID>', methods=['GET'])
+def get_user_resources(userID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM user_resource ur JOIN resource r ON ur.resource_id = r.resource_id  WHERE user_id = %s', (userID,))
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve resources for the user"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
 
 # #------------------------------------------------------------
 # # Retrieves list of ratings made for {employerID}
