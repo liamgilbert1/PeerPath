@@ -119,12 +119,6 @@ def update_user(userID):
     return 'user updated!'
 
 # #------------------------------------------------------------
-# # Retrieve all friends of {userID}
-# @persona1.route('/friends/<int:userID>', methods=['GET'])
-# def todo():
-#     return
-
-# #------------------------------------------------------------
 # Add a new friend of {friend_username} for {userID}
 @persona1.route('/user/<int:userID>/friends/<string:friend_username>', methods=['POST'])
 def add_friend(userID, friend_username):
@@ -155,8 +149,28 @@ def add_friend(userID, friend_username):
     return 'friend added!'
 
 # #------------------------------------------------------------
-# # Remove friend of {friendID} for {userID}
-# @persona1.route('/user/<int:userID>/friends/<int:friendID>', methods=['DELETE'])
-# def todo():
-#     return
+# Remove friend of {friendID} for {userID}
+@persona1.route('/user/<int:userID>/friends/<string:friend_username>', methods=['DELETE'])
+def remove_friend(userID, friend_username):
+        cursor = db.get_db().cursor()
+        cursor.execute('SELECT user_id FROM user WHERE username = %s', (friend_username,))
+        friend_data = cursor.fetchall()
+    
+        if not friend_data:
+            return 'User not found, try a different username!'
+        
+        friendID = friend_data[0]['user_id']
+
+        cursor.execute('SELECT * FROM friendship WHERE user_id = %s AND friend_id = %s', (userID, friendID))
+        
+        theData = cursor.fetchall()
+        
+        if not theData:
+            return make_response(jsonify({"error": "Friend does not exist"}), 404)
+        
+        query = 'DELETE FROM friendship WHERE user_id = %s AND friend_id = %s'
+        data = (userID, friendID)
+        cursor.execute(query, data)
+        db.get_db().commit()
+        return 'friend removed!'
 

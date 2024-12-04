@@ -38,3 +38,8 @@ if st.button("Add Friends",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/Add_Friend.py')
+
+if st.button("Remove Friends",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Remove_Friend.py')
