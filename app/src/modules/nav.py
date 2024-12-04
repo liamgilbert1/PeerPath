@@ -5,6 +5,10 @@
 import streamlit as st
 
 
+def ProfileSettings():
+    st.sidebar.page_link("Profile_Settings.py", label="Profile Settings", icon="👤")
+
+
 #### ------------------------ General ------------------------
 def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
