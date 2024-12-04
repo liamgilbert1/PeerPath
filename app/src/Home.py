@@ -51,18 +51,18 @@ if st.button("Act as Jerry, a 2nd year student searching for his 1st co-op",
     st.session_state['user_id'] = 1
     # we add the first name of the user (so it can be displayed on 
     # subsequent pages). 
-    st.session_state['first_name'] = 'John'
+    st.session_state['first_name'] = 'Jerry'
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
     logger.info("Logging in as Jerry (First Time Co-op Persona)")
     st.switch_page('pages/00_Pol_Strat_Home.py')
 
-if st.button('Act as Mohammad, an USAID worker', 
+if st.button('Act as Jordan, a 4th year finishing his second co-op', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
+    st.session_state['user_id'] = 2
+    st.session_state['first_name'] = 'Jordan'
     st.switch_page('pages/10_USAID_Worker_Home.py')
 
 if st.button('Act as System Administrator', 
