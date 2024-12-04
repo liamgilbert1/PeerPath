@@ -35,8 +35,8 @@ search_status_options = ["applying", "job found", "future applicant", "next cycl
 # Add a text input field for the user to input their first name
 username = st.text_input("Username:", value=current_username)
 email = st.text_input("Email:", value=current_email)
-activity_status = st.selectbox("Activity Status:", activity_status_options, activity_status_options.index(current_activity_status) if activity_status_options in activity_status_options else 0)
-urgency_status = st.selectbox("Urgency Status:", urgency_status_options, urgency_status_options.index(current_urgency_status) if urgency_status_options in urgency_status_options else 0)
+activity_status = st.selectbox("Activity Status:", activity_status_options, activity_status_options.index(current_activity_status) if current_activity_status in activity_status_options else 0)
+urgency_status = st.selectbox("Urgency Status:", urgency_status_options, urgency_status_options.index(current_urgency_status) if current_urgency_status in urgency_status_options else 0)
 search_status = st.selectbox("Search Status:", search_status_options, search_status_options.index(current_search_status) if current_search_status in search_status_options else 0)
 
 def update_profile(username, email, activity_status, urgency_status, search_status):
@@ -48,7 +48,7 @@ def update_profile(username, email, activity_status, urgency_status, search_stat
     if response.status_code == 200:
       st.success("First name updated successfully!")
     else:
-      st.error("Failed to update first name.")
+      st.error("Failed to update profile.")
   except Exception as e:
     st.error(f"An error occurred: {e}")
 
