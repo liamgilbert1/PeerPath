@@ -15,18 +15,33 @@ from backend.db_connection import db
 persona2 = Blueprint('persona2', __name__)
 
 
-#------------------------------------------------------------
-# Get specific user from the system
-@persona2.route('/user/<int:userID>', methods=['GET'])
-def get_user(userID):
+# #------------------------------------------------------------
+# # Get specific user from the system
+# @persona2.route('/user/<int:userID>', methods=['GET'])
+# def get_user(userID):
+#     cursor = db.get_db().cursor()
+#     cursor.execute('SELECT * FROM user WHERE user_id = %s', (userID,))
+    
+#     theData = cursor.fetchall()
+    
+#     if not theData:
+#         return make_response(jsonify({"error": "RIP"}), 404)
+    
+#     the_response = make_response(jsonify(theData))
+#     the_response.status_code = 200
+#     return the_response
+
+@persona2.route('user/<int:userID>', methods=['GET'])
+def get_following(userID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM user WHERE user_id = %s', (userID,))
+    cursor.execute('SELECT first_name, last_name, username, student_type, activity_status, search_status FROM user u JOIN friendship f ON u.user_id = f.friend_id WHERE f.user_id = %s', (userID,))
     
     theData = cursor.fetchall()
-    
+
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+

@@ -4,7 +4,6 @@
 
 import streamlit as st
 
-
 def ProfileSettings():
     st.sidebar.page_link("Profile_Settings.py", label="Profile Settings", icon="👤")
 
@@ -67,7 +66,6 @@ def SideBarLinks(show_home=False):
     """
     This function handles adding links to the sidebar of the app based upon the logged-in user's role, which was put in the streamlit session_state object when logging in.
     """
-
     # add a logo to the sidebar always
     st.sidebar.image("assets/logo.png", width=275)
 

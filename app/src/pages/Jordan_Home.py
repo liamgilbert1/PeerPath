@@ -33,3 +33,8 @@ if st.button("Profile Settings",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/Profile_Settings.py')
+
+if st.button("Add Friends",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Add_Friend.py')
