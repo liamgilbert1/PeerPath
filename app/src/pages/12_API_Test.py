@@ -17,7 +17,8 @@ should not totally die.
 """
 data = {} 
 try:
-  data = requests.get('http://api:4000/p/products').json()
+  user_id = 3
+  data = requests.get(f'http://api:4000/c/user/{user_id}').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
