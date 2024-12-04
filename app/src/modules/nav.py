@@ -5,6 +5,10 @@
 import streamlit as st
 
 
+def ProfileSettings():
+    st.sidebar.page_link("Profile_Settings.py", label="Profile Settings", icon="👤")
+
+
 #### ------------------------ General ------------------------
 def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
@@ -65,7 +69,7 @@ def SideBarLinks(show_home=False):
     """
 
     # add a logo to the sidebar always
-    st.sidebar.image("assets/logo.png", width=150)
+    st.sidebar.image("assets/logo.png", width=275)
 
     # If there is no logged in user, redirect to the Home (Landing) page
     if "authenticated" not in st.session_state:

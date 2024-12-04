@@ -251,6 +251,18 @@ CREATE TABLE IF NOT EXISTS notes (
             ON UPDATE cascade ON DELETE cascade
 );
 
+CREATE TABLE IF NOT EXISTS user_role (
+    user_id int not null,
+    role_id int not null,
+    PRIMARY KEY (user_id, role_id),
+    CONSTRAINT fk_role_user
+        FOREIGN KEY (user_id) REFERENCES user (user_id)
+        ON UPDATE cascade ON DELETE cascade ,
+    CONSTRAINT fk_user_role
+        FOREIGN KEY (role_id) REFERENCES role (role_id)
+            ON UPDATE cascade ON DELETE cascade
+);
+
 SHOW TABLES;
 
 
@@ -1163,3 +1175,103 @@ insert into notes (note_id, user_id, employer_id, coordinator_id, text) values (
 insert into notes (note_id, user_id, employer_id, coordinator_id, text) values (49, 17, 29, null, 'I had the opportunity to present my work to senior leaders and gain valuable feedback');
 insert into notes (note_id, user_id, employer_id, coordinator_id, text) values (50, 18, 9, null, 'The internship provided valuable hands-on experience in a real-world setting');
 
+insert into user_role (user_id, role_id) values (37, 36);
+insert into user_role (user_id, role_id) values (5, 24);
+insert into user_role (user_id, role_id) values (30, 9);
+insert into user_role (user_id, role_id) values (5, 4);
+insert into user_role (user_id, role_id) values (17, 21);
+insert into user_role (user_id, role_id) values (26, 29);
+insert into user_role (user_id, role_id) values (31, 32);
+insert into user_role (user_id, role_id) values (37, 16);
+insert into user_role (user_id, role_id) values (37, 3);
+insert into user_role (user_id, role_id) values (6, 32);
+insert into user_role (user_id, role_id) values (31, 26);
+insert into user_role (user_id, role_id) values (12, 26);
+insert into user_role (user_id, role_id) values (34, 47);
+insert into user_role (user_id, role_id) values (28, 30);
+insert into user_role (user_id, role_id) values (20, 42);
+insert into user_role (user_id, role_id) values (36, 48);
+insert into user_role (user_id, role_id) values (25, 15);
+insert into user_role (user_id, role_id) values (7, 25);
+insert into user_role (user_id, role_id) values (31, 35);
+insert into user_role (user_id, role_id) values (8, 38);
+insert into user_role (user_id, role_id) values (7, 35);
+insert into user_role (user_id, role_id) values (14, 28);
+insert into user_role (user_id, role_id) values (19, 21);
+insert into user_role (user_id, role_id) values (9, 33);
+insert into user_role (user_id, role_id) values (9, 8);
+insert into user_role (user_id, role_id) values (16, 45);
+insert into user_role (user_id, role_id) values (6, 11);
+insert into user_role (user_id, role_id) values (28, 4);
+insert into user_role (user_id, role_id) values (31, 38);
+insert into user_role (user_id, role_id) values (34, 46);
+insert into user_role (user_id, role_id) values (27, 43);
+insert into user_role (user_id, role_id) values (13, 47);
+insert into user_role (user_id, role_id) values (30, 36);
+insert into user_role (user_id, role_id) values (38, 45);
+insert into user_role (user_id, role_id) values (40, 50);
+insert into user_role (user_id, role_id) values (40, 8);
+insert into user_role (user_id, role_id) values (16, 27);
+insert into user_role (user_id, role_id) values (25, 4);
+insert into user_role (user_id, role_id) values (35, 11);
+insert into user_role (user_id, role_id) values (34, 39);
+insert into user_role (user_id, role_id) values (20, 13);
+insert into user_role (user_id, role_id) values (14, 3);
+insert into user_role (user_id, role_id) values (39, 37);
+insert into user_role (user_id, role_id) values (4, 2);
+insert into user_role (user_id, role_id) values (39, 2);
+insert into user_role (user_id, role_id) values (21, 4);
+insert into user_role (user_id, role_id) values (12, 8);
+insert into user_role (user_id, role_id) values (22, 6);
+insert into user_role (user_id, role_id) values (19, 30);
+insert into user_role (user_id, role_id) values (15, 15);
+insert into user_role (user_id, role_id) values (28, 10);
+insert into user_role (user_id, role_id) values (10, 16);
+insert into user_role (user_id, role_id) values (24, 37);
+insert into user_role (user_id, role_id) values (8, 48);
+insert into user_role (user_id, role_id) values (2, 37);
+insert into user_role (user_id, role_id) values (29, 20);
+insert into user_role (user_id, role_id) values (21, 49);
+insert into user_role (user_id, role_id) values (23, 9);
+insert into user_role (user_id, role_id) values (15, 8);
+insert into user_role (user_id, role_id) values (15, 10);
+insert into user_role (user_id, role_id) values (16, 50);
+insert into user_role (user_id, role_id) values (25, 19);
+insert into user_role (user_id, role_id) values (33, 26);
+insert into user_role (user_id, role_id) values (24, 41);
+insert into user_role (user_id, role_id) values (11, 6);
+insert into user_role (user_id, role_id) values (15, 3);
+insert into user_role (user_id, role_id) values (22, 35);
+insert into user_role (user_id, role_id) values (23, 42);
+insert into user_role (user_id, role_id) values (40, 27);
+insert into user_role (user_id, role_id) values (17, 41);
+insert into user_role (user_id, role_id) values (6, 49);
+insert into user_role (user_id, role_id) values (3, 24);
+insert into user_role (user_id, role_id) values (24, 12);
+insert into user_role (user_id, role_id) values (32, 20);
+insert into user_role (user_id, role_id) values (22, 36);
+insert into user_role (user_id, role_id) values (13, 14);
+insert into user_role (user_id, role_id) values (2, 12);
+insert into user_role (user_id, role_id) values (4, 3);
+insert into user_role (user_id, role_id) values (31, 30);
+insert into user_role (user_id, role_id) values (39, 11);
+insert into user_role (user_id, role_id) values (22, 18);
+insert into user_role (user_id, role_id) values (32, 18);
+insert into user_role (user_id, role_id) values (36, 1);
+insert into user_role (user_id, role_id) values (25, 18);
+insert into user_role (user_id, role_id) values (18, 16);
+insert into user_role (user_id, role_id) values (10, 7);
+insert into user_role (user_id, role_id) values (16, 23);
+insert into user_role (user_id, role_id) values (5, 31);
+insert into user_role (user_id, role_id) values (10, 29);
+insert into user_role (user_id, role_id) values (16, 7);
+insert into user_role (user_id, role_id) values (17, 1);
+insert into user_role (user_id, role_id) values (27, 14);
+insert into user_role (user_id, role_id) values (20, 19);
+insert into user_role (user_id, role_id) values (9, 34);
+insert into user_role (user_id, role_id) values (16, 20);
+insert into user_role (user_id, role_id) values (24, 2);
+insert into user_role (user_id, role_id) values (29, 47);
+insert into user_role (user_id, role_id) values (4, 50);
+insert into user_role (user_id, role_id) values (28, 18);
+insert into user_role (user_id, role_id) values (11, 1);

@@ -28,3 +28,8 @@ if st.button("View Classification Demo",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/13_Classification.py')
+
+if st.button("Profile Settings",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Profile_Settings.py')
