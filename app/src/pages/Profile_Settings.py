@@ -19,3 +19,9 @@ try:
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+current_username = [item.get("username", "") for item in data][0]
+current_email = [item.get("email", "") for item in data][0]
+current_activity_status = [item.get("activity_status", "") for item in data][0]
+current_urgency_status = [item.get("urgency_status", "") for item in data][0]
+current_search_status = [item.get("search_status", "") for item in data][0]
