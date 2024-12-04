@@ -34,48 +34,58 @@ def get_user(userID):
 #------------------------------------------------------------
 # Retrieves all of the advice given for {roleID}
 @persona1.route('/advice/<int:roleID>', methods=['GET'])
-def todo():
-    return
+def get_role_advice(roleID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM advice WHERE role = %s', (roleID,))
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve advice for the role"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
 
-#------------------------------------------------------------
-# Retrieves list of resources recommended by {userID}
-@persona1.route('/resources/<int:userID>', methods=['GET'])
-def todo():
-    return
+# #------------------------------------------------------------
+# # Retrieves list of resources recommended by {userID}
+# @persona1.route('/resources/<int:userID>', methods=['GET'])
+# def todo():
+#     return
 
-#------------------------------------------------------------
-# Retrieves list of ratings made for {employerID}
-@persona1.route('/ratings/<int:employerID>', methods=['GET'])
-def todo():
-    return
+# #------------------------------------------------------------
+# # Retrieves list of ratings made for {employerID}
+# @persona1.route('/ratings/<int:employerID>', methods=['GET'])
+# def todo():
+#     return
 
-#------------------------------------------------------------
-#Retrieves list of reviews made for {employerID}
-@persona1.route('/reviews/<int:employerID>', methods=['GET'])
-def todo():
-    return
+# #------------------------------------------------------------
+# #Retrieves list of reviews made for {employerID}
+# @persona1.route('/reviews/<int:employerID>', methods=['GET'])
+# def todo():
+#     return
 
-#------------------------------------------------------------
-# Update mutable attributes of user with {userID}
-@persona1.route('/user/<int:userID>', methods=['PUT'])
-def todo():
-    return
+# #------------------------------------------------------------
+# # Update mutable attributes of user with {userID}
+# @persona1.route('/user/<int:userID>', methods=['PUT'])
+# def todo():
+#     return
 
-#------------------------------------------------------------
-# Retrieve all friends of {userID}
-@persona1.route('/friends/<int:userID>', methods=['GET'])
-def todo():
-    return
+# #------------------------------------------------------------
+# # Retrieve all friends of {userID}
+# @persona1.route('/friends/<int:userID>', methods=['GET'])
+# def todo():
+#     return
 
-#------------------------------------------------------------
-# Add a new friend of {friendID} for {userID}
-@persona1.route('/user/<int:userID>/friends/<int:friendID>', methods=['POST'])
-def todo():
-    return
+# #------------------------------------------------------------
+# # Add a new friend of {friendID} for {userID}
+# @persona1.route('/user/<int:userID>/friends/<int:friendID>', methods=['POST'])
+# def todo():
+#     return
 
-#------------------------------------------------------------
-# Remove friend of {friendID} for {userID}
-@persona1.route('/user/<int:userID>/friends/<int:friendID>', methods=['DELETE'])
-def todo():
-    return
+# #------------------------------------------------------------
+# # Remove friend of {friendID} for {userID}
+# @persona1.route('/user/<int:userID>/friends/<int:friendID>', methods=['DELETE'])
+# def todo():
+#     return
 
