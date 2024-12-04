@@ -80,10 +80,20 @@ def get_employer_ratings(employerID):
     return the_response
 
 # #------------------------------------------------------------
-# #Retrieves list of reviews made for {employerID}
-# @persona1.route('/reviews/<int:employerID>', methods=['GET'])
-# def todo():
-#     return
+#Retrieves list of reviews made for {employerID}
+@persona1.route('/reviews/<int:employerID>', methods=['GET'])
+def get_employer_reviews(employerID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM review re JOIN role ro ON re.role_id = ro.role_id WHERE ro.employer = %s', (employerID,))
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve reviews for the employer"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
 
 # #------------------------------------------------------------
 # # Update mutable attributes of user with {userID}
