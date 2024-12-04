@@ -13,6 +13,8 @@ st.write("# Profile Settings")
 Use this page to update your profile settings. Make your changes, then click the 'Save' button to update your profile.
 """
 
+user_id = st.session_state['user_id']
+
 data = {} 
 try:
   data = requests.get(f'http://api:4000/c/user/{user_id}').json()
@@ -34,3 +36,20 @@ email = st.text_input("Email:", value=current_email)
 activity_status = st.text_input("Activity Status:", value=current_activity_status)
 urgency_status = st.text_input("Urgency Status:", value=current_urgency_status)
 search_status = st.selectbox("Search Status:", search_status_options, search_status_options.index(current_search_status) if current_search_status in search_status_options else 0)
+
+def update_profile(username, email, activity_status, urgency_status, search_status):
+  try:
+    response = requests.put(
+      f'http://api:4000/c/user/{user_id}',
+      json={"username": username, "email": email, "activity_status": activity_status, "urgency_status": urgency_status, "search_status": search_status}
+    )
+    if response.status_code == 200:
+      st.success("First name updated successfully!")
+    else:
+      st.error("Failed to update first name.")
+  except Exception as e:
+    st.error(f"An error occurred: {e}")
+
+# Button to trigger the update function
+if st.button("Save"):
+  update_profile(username, email, activity_status, urgency_status, search_status)
