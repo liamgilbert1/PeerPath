@@ -77,14 +77,14 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
+        # Show ___ and ___ if the user_id = 1.
         if st.session_state["user_id"] == 1:
             PolStratAdvHomeNav()
             WorldBankVizNav()
             MapDemoNav()
 
-        # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "usaid_worker":
+        # If the user id = 2, show ____
+        if st.session_state["user_id"] == 2:
             PredictionNav()
             ApiTestNav()
             ClassificationNav()
