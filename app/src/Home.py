@@ -83,11 +83,11 @@ if st.button('Act as Stacy, a co-op coordinator',
     # TODO - update page name
     st.switch_page('pages/20_Admin_Home.py')
 
-if st.button('Some Text On Button',
-             # if secondary - boring
-             type = 'primary',
-             use_container_width = True):
-        st.session_state['authenticated'] = True
-        st.session_state['role'] = 'Professor'
-        st.switch_page('pages/20_Admin_Home.py')
-
+if st.button('Act as Phil, a system administrator', 
+            type = 'primary', 
+            use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['admin_id'] = 1
+    st.session_state['first_name'] = 'Phil'
+    # TODO - update page name
+    st.switch_page('pages/20_Admin_Home.py')
