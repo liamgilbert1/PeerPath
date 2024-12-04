@@ -49,6 +49,30 @@ except:
   data33 = [{"a": "123", "b": "hello"}, {"a": "456", "b": "goodbye"}]
 st.dataframe(data33)
 
+note_text = st.text_area("Note Text:")
+employer_id = st.text_input("Employer ID (optional):")
+
+def add_note(decisionmakerID, note_text, employer_id):
+  try:
+
+    payload = {
+      "note": note_text,
+      "employer_id": employer_id if employer_id else None
+    }
+    response = requests.post(
+      f'http://api:4000/3/notes/{decisionmakerID}',
+      json = payload
+    )
+    if response.status_code == 200:
+      st.success("Note added successfully!")
+    else:
+      st.error(f"Failed to add note: {response.text}")
+  except Exception as e:
+    st.error(f"An error occurred: {e}")
+
+if st.button("Add"):
+  add_note(1, note_text, employer_id)
+
 data35 = {}
 try:
   data35 = requests.get('http://api:4000/3/ratings/1').json()
