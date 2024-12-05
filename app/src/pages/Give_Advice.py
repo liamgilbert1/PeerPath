@@ -38,7 +38,6 @@ def add_advice(role_id, advice, user_id):
             except ValueError:
                 error_message = response.text or "Unknown error occurred"
             st.error(f"Failed to add advice: {error_message}")
-            # st.error(f"Failed to add advice: {response.json().get('error', response.text)}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
 
