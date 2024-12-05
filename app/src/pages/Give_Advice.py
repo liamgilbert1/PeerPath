@@ -27,7 +27,7 @@ def add_advice(role_id, advice, user_id):
 
     try:
         response = requests.post(
-            f'http://api:4000/c/advice/{role_id}',
+            f'http://api:4000/p/advice/{role_id}',
             json={"advice": advice, "user_id": user_id},  # Send required data as JSON
         )
         if response.status_code == 200:
