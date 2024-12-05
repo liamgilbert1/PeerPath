@@ -13,6 +13,16 @@ st.write("# Answer Question")
 Use this page to answer a question that another student has asked.
 '''
 
+data = {}
+try:
+    data = requests.get(
+    f'http://api:4000/p/questions',
+    ).json()
+    st.dataframe(data)
+except Exception as e:
+    st.error(f"An error occurred: {e}")
+
+user_id = st.session_state["user_id"]
 question_id = st.text_input("Question ID:")
 answer = st.text_area("Answer:")
 
@@ -20,7 +30,7 @@ def add_answer(question_id):
     try:
         response = requests.post(
             f'http://api:4000/p/answer/question/{question_id}',
-            json={"answer": answer},  # Send required data as JSON
+            json={"answer": answer, "user_id": user_id},  # Send required data as JSON
         )
         if response.status_code == 200:
             st.success("Answer added successfully!")
