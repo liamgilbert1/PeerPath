@@ -54,6 +54,11 @@ with col6:
 
 st.write('')
 
+# Questions and Answers Section
+st.subheader("Questions and Answers")
+if st.button('Questions and Answers', type='primary', use_container_width=True):
+    st.switch_page('pages/Questions_And_Answers.py')
+
 # Profile Section
 st.subheader("Profile Settings")
 if st.button('Profile Settings', type='primary', use_container_width=True):
