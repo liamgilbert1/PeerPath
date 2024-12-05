@@ -34,7 +34,7 @@ def get_user(userID):
 @persona1.route('/advice/<int:roleID>', methods=['GET'])
 def get_role_advice(roleID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM advice WHERE role = %s', (roleID,))
+    cursor.execute('SELECT CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, text AS Advice FROM advice a JOIN user u ON a.user = u.user_id WHERE role = %s', (roleID,))
     
     theData = cursor.fetchall()
     
@@ -45,12 +45,28 @@ def get_role_advice(roleID):
     the_response.status_code = 200
     return the_response
 
+#------------------------------------------------------------
+# Retrieves all of the roles and their id's
+@persona1.route('/roles', methods=['GET'])
+def get_roles():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT title AS Position, e.name AS Employer, role_id AS "Role ID", e.employer_id AS "Employer ID" FROM role r JOIN employer e ON r.employer = e.employer_id ORDER BY role_id')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve roles"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
 # #------------------------------------------------------------
 # # Retrieves list of resources recommended by {userID}
-@persona1.route('/resources/<int:userID>', methods=['GET'])
-def get_user_resources(userID):
+@persona1.route('/resources/<string:username>', methods=['GET'])
+def get_user_resources(username):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM user_resource ur JOIN resource r ON ur.resource_id = r.resource_id  WHERE user_id = %s', (userID,))
+    cursor.execute('SELECT r.title AS Resource, r.link AS Link, r.description AS Description FROM user_resource ur JOIN resource r ON ur.resource_id = r.resource_id JOIN user u ON u.user_id = ur.user_id WHERE u.username = %s', (username,))
     
     theData = cursor.fetchall()
     
