@@ -14,21 +14,6 @@ st.write('')
 st.write('')
 st.write('### What would you like to do?')
 
-if st.button('Predict Value Based on Regression Model', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/11_Prediction.py')
-
-if st.button('View the Simple API Demo', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/12_API_Test.py')
-
-if st.button("View Classification Demo",
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/13_Classification.py')
-
 if st.button("Find and View Users",
              type='primary',
              use_container_width=True):
