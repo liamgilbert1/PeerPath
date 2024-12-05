@@ -96,3 +96,15 @@ def add_rating(userID, employerID):
     cursor.execute('INSERT INTO rating (user_id, employer_id, rating) VALUES (%s, %s, %s)', (userID, employerID, data['rating']))
     db.get_db().commit()
     return make_response(jsonify({"message": "Rating added successfully"}), 200)
+
+# Edit existing rating (put)
+# /users/{userID}/ratings/{employerID}
+@persona2.route('/users/<int:userID>/ratings/<int:employerID>', methods=['PUT'])
+def edit_rating(userID, employerID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'rating' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('UPDATE rating SET rating = %s WHERE user_id = %s AND employer_id = %s', (data['rating'], userID, employerID))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Rating updated successfully"}), 200)
