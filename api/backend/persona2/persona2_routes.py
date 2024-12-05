@@ -130,3 +130,15 @@ def add_answer(questionID):
     cursor.execute('INSERT INTO answer (question_id, answer) VALUES (%s, %s)', (questionID, data['answer']))
     db.get_db().commit()
     return make_response(jsonify({"message": "Answer added successfully"}), 200)
+
+# Add new review for userID (post)
+# /reviews/{userID}
+@persona2.route('/reviews/<int:userID>', methods=['POST'])
+def add_review(userID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'review' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO review (user_id, review) VALUES (%s, %s)', (userID, data['review']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Review added successfully"}), 200)
