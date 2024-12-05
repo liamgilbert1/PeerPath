@@ -94,10 +94,20 @@ def add_resource(userID):
     cursor = db.get_db().cursor()
     data = request.get_json()
 
-    if not data or 'resource_name' not in data or 'resource_details' not in data:
-        return make_response(jsonify({"error": "Invalid input data"}), 400)
-    
-    cursor.execute('INSERT INTO user_resource (user_id, title, description) VALUES (%s, %s, %s)', (userID, data['resource_name'], data['resource_details']))
+    # check if resource already exists. If it doesnt, create a new resource
+    cursor.execute('SELECT * FROM resource WHERE title = %s AND description = %s', (data['title'], data['description']))
+    resource_check = cursor.fetchall()
+
+    if not resource_check:
+        cursor.execute('INSERT INTO resource (title, description, link) VALUES (%s, %s, %s)', (data['title'], data['description'], data['link']))
+        db.get_db().commit()
+
+    # get resource_id
+    cursor.execute('SELECT resource_id FROM resource WHERE title = %s AND description = %s', (data['title'], data['description']))
+    resource_id = cursor.fetchall()[0]['resource_id']
+
+    # add resource to user_resource bridge table
+    cursor.execute('INSERT INTO user_resource (user_id, resource_id) VALUES (%s, %s)', (userID, resource_id))
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Resource added successfully"}), 200)

@@ -16,12 +16,13 @@ Use this page to add a resource to the system.
 resource_name = st.text_input("Resource Name:")
 resource_details = st.text_area("Resource Details:")
 user_id = st.session_state['user_id']
+link = st.text_input("Link (Optional):", "")
 
 def add_resource(user_id):
     try:
         response = requests.post(
             f'http://api:4000/p/resources/{user_id}',
-            json={"title": resource_name, "description": resource_details},  # Send required data as JSON
+            json={"title": resource_name, "description": resource_details, "link": link},  # Send required data as JSON
         )
         if response.status_code == 200:
             st.success("Resource added successfully!")
