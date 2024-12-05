@@ -115,6 +115,24 @@ def update_note(decisionmakerID, noteID, note_text, employer_id):
 if st.button("Update"):
   update_note(1, 1, note, employer_id)
 
+
+note_id = st.text_input("Note ID:")
+
+def delete_note(decisionmakerID, noteID):
+  try:
+    response = requests.delete(
+      f'http://api:4000/3/notes/{decisionmakerID}/{noteID}'
+    )
+    if response.status_code == 200:
+      st.success("Note deleted successfully!")
+    else:
+      st.error(f"Failed to delete note: {response.text}")
+  except Exception as e:
+    st.error(f"An error occurred: {e}")
+  
+if st.button("Delete"):
+  delete_note(1, note_id)
+
 data35 = {}
 try:
   data35 = requests.get('http://api:4000/3/ratings/1').json()
