@@ -19,6 +19,11 @@ Students:
 - Answer Common Questions
 - Add, Edit, & Delete Reviews
 
+Co-op Coordinators & Other Decision Makers:
+- Find & View Users
+- Retrieve Ratings
+- Manage Notes
+
 ## Current Project Components
 
 Currently, there are three major components which will each run in their own Docker Containers:
