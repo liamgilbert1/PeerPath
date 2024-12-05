@@ -29,6 +29,11 @@ if st.button('Find Resources',
             use_container_width=True):
   st.switch_page('pages/Find_Resources.py')
 
+if st.button('View Friends', 
+          type='primary',
+          use_container_width=True):
+  st.switch_page('pages/View_Friends.py')
+
 if st.button('Add Friends', 
             type='primary',
             use_container_width=True):
