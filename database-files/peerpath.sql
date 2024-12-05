@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS rating (
              ON UPDATE cascade ON DELETE cascade,
      CONSTRAINT fk_rating_role
          FOREIGN KEY (role_id) REFERENCES  role (role_id)
-             ON UPDATE cascade ON DELETE cascade,
+             ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS review (
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS review (
             ON UPDATE cascade ON DELETE cascade,
     CONSTRAINT fk_review_role
         FOREIGN KEY (role_id) REFERENCES role (role_id)
-            ON UPDATE cascade ON DELETE cascade,
+            ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS peer_interaction (
