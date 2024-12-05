@@ -97,8 +97,8 @@ def update_status(requestID):
         return make_response(jsonify({"error": "Could not update status"}), 400)
     
     sql_query = '''
-        UPDATE help_requests
-        SET status = %s, 
+        UPDATE help_request
+        SET status = %s 
         WHERE request_id = %s;
     '''
 
@@ -107,7 +107,7 @@ def update_status(requestID):
     db.get_db().commit()
     return make_response(jsonify({"message": "Status updated successfully"}), 200)
 
-@persona4.route('/helprequest/<int:requestID>', methods=['PUT'])
+@persona4.route('/helprequest/<int:requestID>', methods=['DELETE'])
 def delete_request(requestID):
     cursor = db.get_db().cursor()
 
