@@ -160,7 +160,7 @@ def delete_rating(userID, employerID):
 
 # Add answer to question (post)
 # /questions/{questionID}/answers
-@persona2.route('/questions/<int:questionID>/answers', methods=['POST'])
+@persona2.route('/answer/question/<int:questionID>', methods=['POST'])
 def add_answer(questionID):
     cursor = db.get_db().cursor()
     data = request.get_json()
@@ -168,7 +168,7 @@ def add_answer(questionID):
     if not data or 'answer' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     
-    cursor.execute('INSERT INTO answer (question_id, answer) VALUES (%s, %s)', (questionID, data['answer']))
+    cursor.execute('INSERT INTO answer (answer) VALUES (%s, %s)', (data['answer']))
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Answer added successfully"}), 200)

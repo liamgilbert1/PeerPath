@@ -19,7 +19,7 @@ answer = st.text_area("Answer:")
 def add_answer(question_id):
     try:
         response = requests.post(
-            f'http://api:4000/p/question/{question_id}/answer',
+            f'http://api:4000/p/answer/question/{question_id}',
             json={"answer": answer},  # Send required data as JSON
         )
         if response.status_code == 200:
