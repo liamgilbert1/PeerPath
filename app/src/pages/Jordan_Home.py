@@ -17,37 +17,37 @@ st.write('### How can we help you on your co-op search?')
 if st.button('Give Advice for Role', 
              type='primary',
              use_container_width=True):
-  st.switch_page('Give_Advice.py')
+  st.switch_page('pages/Give_Advice.py')
 
 if st.button('Add a Resource', 
              type='primary',
              use_container_width=True):
-  st.switch_page('Add_Resource.py')
+  st.switch_page('pages/Add_Resource.py')
 
 if st.button("Add a Rating",
              type='primary',
              use_container_width=True):
-  st.switch_page('Add_Rating.py')
+  st.switch_page('pages/Add_Rating.py')
 
 if st.button("Edit a Rating",
              type='primary',
              use_container_width=True):
-  st.switch_page('Edit_Rating.py')
+  st.switch_page('pages/Edit_Rating.py')
 
 if st.button("Delete a Rating",
              type='primary',
              use_container_width=True):
-  st.switch_page('Delete_Rating.py')
+  st.switch_page('pages/Delete_Rating.py')
 
 if st.button("Answer an Underclassman's Question",
              type='primary',
              use_container_width=True):
-  st.switch_page('Answer_Question.py')
+  st.switch_page('pages/Answer_Question.py')
 
 if st.button("Add a Review",
              type='primary',
              use_container_width=True):
-  st.switch_page('Add_Review.py')
+  st.switch_page('pages/Add_Review.py')
 
 if st.button('View Friends', 
             type='primary',
