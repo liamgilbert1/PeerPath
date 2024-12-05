@@ -193,3 +193,19 @@ def remove_friend(userID, friend_username):
     db.get_db().commit()
     return 'friend removed!'
 
+# #------------------------------------------------------------
+# Retrieves all questions and shows the question and answer
+@persona1.route('/questions', methods=['GET'])
+def get_questions():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT question_text AS Question, answer AS Answer FROM answer a JOIN question q ON a.question = q.question_id')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve questions"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
