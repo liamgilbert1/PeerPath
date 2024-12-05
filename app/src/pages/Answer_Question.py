@@ -32,3 +32,7 @@ def add_answer(question_id):
             st.error(f"Failed to add answer: {error_message}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
+
+# Button to trigger the add_answer function
+if st.button("Add"):
+    add_answer(question_id)
