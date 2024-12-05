@@ -39,10 +39,10 @@ if st.button("Create New Alert",
              use_container_width=True):
   st.switch_page('pages/Add_Alert.py')
 
-if st.button("Manage User",
+if st.button("Manage Users",
             type='primary',
             use_container_width=True):
-  st.switch_page('Delete User.py')
+  st.switch_page('pages/Manage_Users.py')
 
 if st.button("Manage Advice",
             type='primary',

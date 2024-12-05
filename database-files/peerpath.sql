@@ -122,10 +122,10 @@ CREATE TABLE IF NOT EXISTS user_resource (
     PRIMARY KEY (user_id, resource_id),
     CONSTRAINT fk_user_id_resource
         FOREIGN KEY (user_id) REFERENCES  user (user_id)
-            ON UPDATE cascade ON DELETE restrict,
+            ON UPDATE cascade ON DELETE cascade,
     CONSTRAINT fk_resource_id_user
         FOREIGN KEY (resource_id) REFERENCES  resource (resource_id)
-            ON UPDATE cascade ON DELETE restrict
+            ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS hourly_activity (

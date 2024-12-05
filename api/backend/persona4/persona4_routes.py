@@ -159,10 +159,10 @@ def add_alert(adminID):
     return make_response(jsonify({"message": "Alert posted successfully"}), 200)
 
 
-@persona4.route('/users/<int:userID>', methods=['GET'])
-def get_user(userID):
+@persona4.route('/users', methods=['GET'])
+def get_user():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM user WHERE user_id= %s', (userID,))
+    cursor.execute('SELECT * FROM user')
     
     theData = cursor.fetchall()
     
