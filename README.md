@@ -24,6 +24,14 @@ Co-op Coordinators & Other Decision Makers:
 - Retrieve Ratings
 - Manage Notes
 
+System Administrators:
+- View Hourly Activity
+- Manage User Permissions
+- Manage Requests
+- View & Create System Alerts
+- Manage Users
+- Manage Advice
+
 ## Current Project Components
 
 Currently, there are three major components which will each run in their own Docker Containers:
