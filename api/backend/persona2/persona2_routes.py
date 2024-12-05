@@ -127,7 +127,7 @@ def add_rating(userID, roleID):
     lifestyle_rating = data['lifestyle_rating']
 
 
-    if not data or 'rating' not in data:
+    if not data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     
     cursor.execute('INSERT INTO rating (user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) VALUES (%s, %s, %s, %s, %s, %s, %s)', (userID, roleID, future_job_rating, work_quality_rating, manager_rating, salary_rating, lifestyle_rating))
