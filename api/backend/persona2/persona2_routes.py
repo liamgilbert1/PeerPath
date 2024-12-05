@@ -115,15 +115,22 @@ def add_resource(userID):
 
 # Add rating for userID on employerID (post)
 # /users/{userID}/ratings/{employerID}
-@persona2.route('/users/<int:userID>/ratings/<int:employerID>', methods=['POST'])
-def add_rating(userID, employerID):
+@persona2.route('/users/<int:userID>/ratings/<int:roleID>', methods=['POST'])
+def add_rating(userID, roleID):
     cursor = db.get_db().cursor()
     data = request.get_json()
 
-    if not data or 'rating' not in data:
+    future_job_rating = data['future_job_rating']
+    work_quality_rating = data['work_quality_rating']
+    manager_rating = data['manager_rating']
+    salary_rating = data['salary_rating']
+    lifestyle_rating = data['lifestyle_rating']
+
+
+    if not data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     
-    cursor.execute('INSERT INTO rating (user_id, employer_id, rating) VALUES (%s, %s, %s)', (userID, employerID, data['rating']))
+    cursor.execute('INSERT INTO rating (user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) VALUES (%s, %s, %s, %s, %s, %s, %s)', (userID, roleID, future_job_rating, work_quality_rating, manager_rating, salary_rating, lifestyle_rating))
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Rating added successfully"}), 200)
