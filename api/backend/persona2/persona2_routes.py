@@ -73,16 +73,16 @@ def add_advice(roleID):
 
     # Check if the user has the specified role
     cursor.execute(
-        'SELECT COUNT(*) FROM user_roles WHERE user_id = %s AND role_id = %s',
+        'SELECT COUNT(*) FROM user_role WHERE user_id = %s AND role_id = %s',
         (data['user_id'], roleID)
     )
-    role_check = cursor.fetchone()
+    role_check = cursor.fetchall()
 
     # If no role exists for the user, reject the request
     if role_check[0] == 0:
         return make_response(jsonify({"error": "User does not have the specified role"}), 403)
     
-    cursor.execute('INSERT INTO advice (role, advice) VALUES (%s, %s)', (roleID, data['advice']))
+    cursor.execute('INSERT INTO advice (role, advice_text, user) VALUES (%s, %s, %s)', (roleID, data['advice'], data['user_id']))
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Advice added successfully"}), 200)
