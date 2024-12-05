@@ -94,10 +94,10 @@ def add_resource(userID):
     cursor = db.get_db().cursor()
     data = request.get_json()
 
-    if not data or 'resource' not in data:
+    if not data or 'resource_name' not in data or 'resource_details' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     
-    cursor.execute('INSERT INTO user_resource (user_id, resource_id) VALUES (%s, %s)', (userID, data['resource']))
+    cursor.execute('INSERT INTO user_resource (user_id, title, description) VALUES (%s, %s, %s)', (userID, data['resource_name'], data['resource_details']))
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Resource added successfully"}), 200)
