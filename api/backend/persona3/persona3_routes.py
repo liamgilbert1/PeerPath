@@ -25,7 +25,19 @@ def get_users():
     the_response.status_code = 200
     return the_response
 
-
+@persona3.route('/users/<int:userID>', methods=['GET'])
+def get_user(userID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM user WHERE user_id = %s', (userID,))
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "RIP"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
 
 
 @persona3.route('/ratings', methods=['GET'])
