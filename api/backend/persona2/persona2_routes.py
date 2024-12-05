@@ -70,6 +70,18 @@ def add_advice(roleID):
     if not data or 'advice' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     
+
+    # Check if the user has the specified role
+    cursor.execute(
+        'SELECT COUNT(*) FROM user_roles WHERE user_id = %s AND role_id = %s',
+        (data['user_id'], roleID)
+    )
+    role_check = cursor.fetchone()
+
+    # If no role exists for the user, reject the request
+    if role_check[0] == 0:
+        return make_response(jsonify({"error": "User does not have the specified role"}), 403)
+    
     cursor.execute('INSERT INTO advice (role, advice) VALUES (%s, %s)', (roleID, data['advice']))
 
     db.get_db().commit()
@@ -162,6 +174,6 @@ def add_review(userID):
 
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     cursor.execute('INSERT INTO review (user_id, review) VALUES (%s, %s)', (userID, data['review']))
-    
+
     db.get_db().commit()
     return make_response(jsonify({"message": "Review added successfully"}), 200)
