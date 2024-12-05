@@ -6,9 +6,18 @@ PeerPath: an unfiltered network for professional development.
 
 ## Functionality
 
-If you are not familiar with web app development, this code base might be confusing. You will probably want two versions though:
-1. One version for you to explore, try things, break things, etc. We'll call this your **Personal Repo** 
-1. One version of the repo that your team will share.  We'll call this the **Team Repo**. 
+PeerPath is able to carry out a variety of functions for multiple user types. Some of our abilities include...
+
+Students:
+- View Co-op Roles
+- See & Give Advice
+- Find & Add Resources
+- View, Add, & Remove Friends
+- Employer Ratings & Reviews
+- Profile Settings
+- Add Ratings
+- Answer Common Questions
+- Add, Edit, & Delete Reviews
 
 ## Current Project Components
 
