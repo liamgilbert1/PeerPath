@@ -25,10 +25,10 @@ def get_users():
     the_response.status_code = 200
     return the_response
 
-@persona3.route('/users/<int:userID>', methods=['GET'])
-def get_user(userID):
+@persona3.route('/users/<string:username>', methods=['GET'])
+def get_user(username):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM user WHERE user_id = %s', (userID,))
+    cursor.execute('SELECT * FROM user WHERE username = %s', (username,))
     
     theData = cursor.fetchall()
     
@@ -57,18 +57,34 @@ def get_ratings():
 @persona3.route('/notes/<int:decisionmakerID>', methods=['GET'])
 def get_notes(decisionmakerID):
     cursor = db.get_db().cursor()
-    sql_query = '''
-        SELECT *
-        FROM notes
-        WHERE (coordinator_id = %s OR %s IS NULL)
-        AND (employer_id = %s OR %s IS NULL);
-    '''
-    cursor.execute(sql_query, (decisionmakerID, decisionmakerID, None, None))
+    data = request.json
+
+    filter_type = data.get('filter_type')
+
+    if not data or not filter_type:
+        return make_response(jsonify({"error": "Filter type is required"}), 400)
+
+    if filter_type == "coordinator":
+        sql_query = '''
+            SELECT *
+            FROM notes
+            WHERE coordinator_id = %s;
+        '''
+        cursor.execute(sql_query, (decisionmakerID,))
+    elif filter_type == "employer":
+        sql_query = '''
+            SELECT *
+            FROM notes
+            WHERE employer_id = %s;
+        '''
+        cursor.execute(sql_query, (decisionmakerID,))
+    else:
+        return make_response(jsonify({"error": "Invalid filter type"}), 400)
     
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "No notes found"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -79,76 +95,66 @@ def get_notes(decisionmakerID):
 @persona3.route('/notes/<int:decisionmakerID>', methods=['POST'])
 def add_notes(decisionmakerID):
     cursor = db.get_db().cursor()
+    data = request.json
+    
+    filter_type = data.get('filter_type')
+    note_text = data.get('note_text')
+    user_id = data.get('user_id')
 
-    # Extract the note details from the request body
-    note_text = request.json.get('note')
-    employer_id = request.json.get('employer_id', None)
+    if not data or not filter_type or not note_text or not user_id:
+        return make_response(jsonify({"error": "All fields are required"}), 400)
 
-    # Check if the coordinator_id (decisionmakerID) exists in the coordinator table
-    cursor.execute('SELECT coordinator_id FROM coordinator WHERE coordinator_id = %s', (decisionmakerID,))
-    coordinator_data = cursor.fetchall()
-
-    if not coordinator_data:
-        return make_response(jsonify({"error": "Coordinator does not exist"}), 404)
-
-    # If employer_id is provided, check if it exists in the employer table
-    if employer_id:
-        cursor.execute('SELECT employer_id FROM employer WHERE employer_id = %s', (employer_id,))
-        employer_data = cursor.fetchall()
-
-        if not employer_data:
-            return make_response(jsonify({"error": "Employer does not exist"}), 404)
-
-    # Insert the note into the notes table
-    query = '''
-        INSERT INTO notes (user_id, employer_id, coordinator_id, text)
-        VALUES (%s, %s, %s, %s)
-    '''
-    data = (decisionmakerID, employer_id, decisionmakerID, note_text)
-    cursor.execute(query, data)
-
-    # Commit the transaction
+    if filter_type == "coordinator":
+        sql_query = '''
+            INSERT INTO notes (coordinator_id, note_text, user_id)
+            VALUES (%s, %s, %s);
+        '''
+        cursor.execute(sql_query, (decisionmakerID, note_text, user_id))
+    elif filter_type == "employer":
+        sql_query = '''
+            INSERT INTO notes (employer_id, note_text, user_id)
+            VALUES (%s, %s, %s);
+        '''
+        cursor.execute(sql_query, (decisionmakerID, note_text, user_id))
+    else:
+        return make_response(jsonify({"error": "Invalid filter type"}), 400)
+    
     db.get_db().commit()
+    return make_response(jsonify({"message": "Note added successfully"}), 200)
 
-    return make_response(jsonify({"message": "Note added"}), 200)
 
 
 @persona3.route('/notes/<int:decisionmakerID>/<int:noteID>', methods=['PUT'])
 def update_notes(decisionmakerID, noteID):
     cursor = db.get_db().cursor()
 
-    # Extract the note details from the request body
-    note_text = request.json.get('note')
-    employer_id = request.json.get('employer_id', None)
+    data = request.json
+    filter_type = request.json.get('filter_type')
+    note_text = request.json.get('note_text')
+    user_id = request.json.get('user_id')
 
-    # Check if the coordinator_id (decisionmakerID) exists in the coordinator table
-    cursor.execute('SELECT coordinator_id FROM coordinator WHERE coordinator_id = %s', (decisionmakerID,))
-    coordinator_data = cursor.fetchall()
+    if not data or not filter_type or not note_text or not user_id:
+        return make_response(jsonify({"error": "All fields are required"}), 400)
+    
+    if filter_type == "coordinator":
+        sql_query = '''
+            UPDATE notes
+            SET note_text = %s, user_id = %s
+            WHERE coordinator_id = %s AND note_id = %s;
+        '''
+    elif filter_type == "employer":
+        sql_query = '''
+            UPDATE notes
+            SET note_text = %s, user_id = %s
+            WHERE employer_id = %s AND note_id = %s;
+        '''
+    else:
+        return make_response(jsonify({"error": "Invalid filter type"}), 400)
 
-    if not coordinator_data:
-        return make_response(jsonify({"error": "Coordinator does not exist"}), 404)
-
-    # If employer_id is provided, check if it exists in the employer table
-    if employer_id:
-        cursor.execute('SELECT employer_id FROM employer WHERE employer_id = %s', (employer_id,))
-        employer_data = cursor.fetchall()
-
-        if not employer_data:
-            return make_response(jsonify({"error": "Employer does not exist"}), 404)
-
-    # Update the note in the notes table
-    query = '''
-        UPDATE notes
-        SET employer_id = %s, text = %s
-        WHERE note_id = %s
-    '''
-    data = (employer_id, note_text, noteID)
-    cursor.execute(query, data)
-
-    # Commit the transaction
+    cursor.execute(sql_query, (note_text, user_id, decisionmakerID, noteID))
+    
     db.get_db().commit()
-
-    return make_response(jsonify({"message": "Note updated"}), 200)
+    return make_response(jsonify({"message": "Note updated successfully"}), 200)
 
 
 
@@ -156,27 +162,29 @@ def update_notes(decisionmakerID, noteID):
 def delete_notes(decisionmakerID, noteID):
     cursor = db.get_db().cursor()
 
-    # Check if the coordinator_id (decisionmakerID) exists in the coordinator table
-    cursor.execute('SELECT coordinator_id FROM coordinator WHERE coordinator_id = %s', (decisionmakerID,))
-    coordinator_data = cursor.fetchall()
+    data = request.json
+    filter_type = request.json.get('filter_type')
 
-    if not coordinator_data:
-        return make_response(jsonify({"error": "Coordinator does not exist"}), 404)
+    if not data or not filter_type:
+        return make_response(jsonify({"error": "Filter type is required"}), 400)
+    
+    if filter_type == "coordinator":
+        sql_query = '''
+            DELETE FROM notes
+            WHERE coordinator_id = %s AND note_id = %s;
+        '''
+    elif filter_type == "employer":
+        sql_query = '''
+            DELETE FROM notes
+            WHERE employer_id = %s AND note_id = %s;
+        '''
+    else:
+        return make_response(jsonify({"error": "Invalid filter type"}), 400)
+    
+    cursor.execute(sql_query, (decisionmakerID, noteID))
 
-    # Delete the note from the notes table
-    query = '''
-        DELETE FROM notes
-        WHERE note_id = %s
-    '''
-    cursor.execute(query, (noteID,))
-
-    # Commit the transaction
     db.get_db().commit()
-
-    return make_response(jsonify({"message": "Note deleted"}), 200)
-
-
-
+    return make_response(jsonify({"message": "Note deleted successfully"}), 200)
 
 
 
