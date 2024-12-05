@@ -23,3 +23,8 @@ if st.button('See Advice',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/Get_Advice.py')
+
+if st.button('Find Resources', 
+            type='primary',
+            use_container_width=True):
+  st.switch_page('pages/Find_Resources.py')
