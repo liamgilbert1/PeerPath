@@ -1,0 +1,62 @@
+import logging
+logger = logging.getLogger(__name__)
+import streamlit as st
+import requests
+from streamlit_extras.app_logo import add_logo
+from modules.nav import SideBarLinks
+
+SideBarLinks()
+
+st.write("# Add Rating")
+
+'''
+Use this page to add ratings on specific components of your co-op experience. Each rating is on a scale of 0-1 (overall score is on a scale of 0-5).
+'''
+
+user_id = st.session_state['user_id']
+employer_id = st.text_input("Employer ID:")
+future_job_rating = st.text_input("Future Job Score:")
+work_quality_rating = st.text_input("Work Quality Score:")
+manager_rating = st.text_input("Manager Score:")
+salary_rating = st.text_input("Salary Score:")
+lifestyle_rating = st.text_input("Lifestyle Score:")
+
+def add_rating(user_id, employer_id):
+    if not employer_id or not employer_id.isdigit():
+        st.error("Invalid Employer ID. Please enter a numeric value.")
+        return
+    if not future_job_rating.isdigit():
+        st.error("Future Job Score must be a numeric value from 0-1.")
+        return
+    if not work_quality_rating.isdigit():
+        st.error("Work Quality Score must be a numeric value from 0-1.")
+        return
+    if not manager_rating.isdigit():
+        st.error("Manager Score must be a numeric value from 0-1.")
+        return
+    if not salary_rating.isdigit():
+        st.error("Salary Score must be a numeric value from 0-1.")
+        return
+    if not lifestyle_rating.isdigit():
+        st.error("Lifestyle Score must be a numeric value from 0-1.")
+        return
+
+    try:
+        response = requests.post(
+            f'http://api:4000/p/users/{user_id}/ratings/{employer_id}',
+            json={"user_id": user_id},  # Send required data as JSON
+        )
+        if response.status_code == 200:
+            st.success("Rating added successfully!")
+        else:
+            try:
+                error_message = response.json().get("error", response.text)
+            except ValueError:
+                error_message = response.text or "Unknown error occurred"
+            st.error(f"Failed to add rating: {error_message}")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+
+# Button to trigger the add_rating function
+if st.button("Add"):
+    add_rating(user_id, employer_id)
