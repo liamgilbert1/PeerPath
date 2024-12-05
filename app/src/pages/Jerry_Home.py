@@ -39,6 +39,16 @@ if st.button('Remove Friends',
             use_container_width=True):
   st.switch_page('pages/Remove_Friend.py')
 
+if st.button('Employer Ratings', 
+            type='primary',
+            use_container_width=True):
+  st.switch_page('pages/See_Ratings.py')
+
+if st.button('Employer Reviews', 
+            type='primary',
+            use_container_width=True):
+  st.switch_page('pages/See_Reviews.py')
+
 if st.button('Profile Settings', 
             type='primary',
             use_container_width=True):
