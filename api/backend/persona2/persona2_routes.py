@@ -118,3 +118,15 @@ def delete_rating(userID, employerID):
     cursor.execute('DELETE FROM rating WHERE user_id = %s AND employer_id = %s', (userID, employerID))
     db.get_db().commit()
     return make_response(jsonify({"message": "Rating deleted successfully"}), 200)
+
+# Add answer to question (post)
+# /questions/{questionID}/answers
+@persona2.route('/questions/<int:questionID>/answers', methods=['POST'])
+def add_answer(questionID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'answer' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO answer (question_id, answer) VALUES (%s, %s)', (questionID, data['answer']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Answer added successfully"}), 200)
