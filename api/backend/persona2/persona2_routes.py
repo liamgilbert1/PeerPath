@@ -66,6 +66,8 @@ Routes to make:
 def add_advice(roleID):
     cursor = db.get_db().cursor()
     data = request.get_json()
+    if not data or 'advice' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
     cursor.execute('INSERT INTO advice (role, advice) VALUES (%s, %s)', (roleID, data['advice']))
     db.get_db().commit()
     return make_response(jsonify({"message": "Advice added successfully"}), 200)
