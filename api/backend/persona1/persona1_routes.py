@@ -99,7 +99,7 @@ def get_employer_ratings(employerID):
 def get_employer_reviews(employerID):
     cursor = db.get_db().cursor()
     cursor.execute(
-        'SELECT * FROM review re JOIN role ro ON re.role_id = ro.role_id WHERE ro.employer = %s', 
+        'SELECT title AS Role, comment AS Review FROM review re JOIN role ro ON re.role_id = ro.role_id WHERE ro.employer = %s', 
         (employerID,)
     )
     
