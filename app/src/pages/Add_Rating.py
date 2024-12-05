@@ -25,20 +25,20 @@ def add_rating(user_id, role_id):
     if not role_id or not role_id.isdigit():
         st.error("Invalid Employer ID. Please enter a numeric value.")
         return
-    if not future_job_rating.isdigit():
-        st.error("Future Job Score must be a numeric value from 0-1.")
+    if not future_job_rating.isdigit() or int(future_job_rating) not in range(1, 11):
+        st.error("Future Job Score must be a numeric value from 1-10.")
         return
-    if not work_quality_rating.isdigit():
-        st.error("Work Quality Score must be a numeric value from 0-1.")
+    if not work_quality_rating.isdigit() or int(work_quality_rating) not in range(1, 11):
+        st.error("Work Quality Score must be a numeric value from 1-10.")
         return
-    if not manager_rating.isdigit():
-        st.error("Manager Score must be a numeric value from 0-1.")
+    if not manager_rating.isdigit() or int(manager_rating) not in range(1, 11):
+        st.error("Manager Score must be a numeric value from 1-10.")
         return
-    if not salary_rating.isdigit():
-        st.error("Salary Score must be a numeric value from 0-1.")
+    if not salary_rating.isdigit() or int(salary_rating) not in range(1, 11):
+        st.error("Salary Score must be a numeric value from 1-10.")
         return
-    if not lifestyle_rating.isdigit():
-        st.error("Lifestyle Score must be a numeric value from 0-1.")
+    if not lifestyle_rating.isdigit() or int(lifestyle_rating) not in range(1, 11):
+        st.error("Lifestyle Score must be a numeric value from 1-10.")
         return
 
     try:
