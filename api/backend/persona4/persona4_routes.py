@@ -183,7 +183,7 @@ def delete_user(userID):
 @persona4.route('/advice', methods=['GET'])
 def get_advice():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT advice_id as Advice_ID, CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, text AS Advice FROM advice a JOIN user u ON a.user = u.user_id')
+    cursor.execute('SELECT advice_id as Advice_ID, CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, advice_text AS Advice FROM advice a JOIN user u ON a.user = u.user_id')
     
     theData = cursor.fetchall()
     
@@ -198,7 +198,7 @@ def get_advice():
 @persona4.route('/advice/<int:roleID>', methods=['GET'])
 def get_role_advice(roleID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT advice_id as Advice_ID, CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, text AS Advice FROM advice a JOIN user u ON a.user = u.user_id WHERE role = %s', (roleID,))
+    cursor.execute('SELECT advice_id as Advice_ID, CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, advice_text AS Advice FROM advice a JOIN user u ON a.user = u.user_id WHERE role = %s', (roleID,))
     
     theData = cursor.fetchall()
     

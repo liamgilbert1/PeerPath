@@ -20,7 +20,7 @@ def add_alert(title, description, receivers, admin_id):
     try:
         response = requests.post(
             f'http://api:4000/4/systemalert/{admin_id}',
-            json={"title": title, "description": description, "receivers": receivers}
+            json={"title": title, "description": description, "receivers": receivers.lower()}
         )
         if response.status_code == 200:
             st.success("Alert posted successfully!")
