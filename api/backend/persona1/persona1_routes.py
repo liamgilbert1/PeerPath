@@ -50,7 +50,7 @@ def get_role_advice(roleID):
 @persona1.route('/roles', methods=['GET'])
 def get_roles():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT title AS Position, e.name AS Employer, role_id AS ID FROM role r JOIN employer e ON r.employer = e.employer_id ORDER BY role_id')
+    cursor.execute('SELECT title AS Position, e.name AS Employer, role_id AS "Role ID", e.employer_id AS "Employer ID" FROM role r JOIN employer e ON r.employer = e.employer_id ORDER BY role_id')
     
     theData = cursor.fetchall()
     
