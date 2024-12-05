@@ -14,10 +14,10 @@ st.write('')
 st.write('')
 st.write('### How can we help you on your co-op search?')
 
-if st.button('View World Bank Data Visualization', 
+if st.button('View Roles', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_World_Bank_Viz.py')
+  st.switch_page('pages/Job_list.py')
 
 if st.button('View World Map Demo', 
              type='primary',
