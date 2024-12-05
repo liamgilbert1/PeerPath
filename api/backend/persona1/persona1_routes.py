@@ -34,7 +34,7 @@ def get_user(userID):
 @persona1.route('/advice/<int:roleID>', methods=['GET'])
 def get_role_advice(roleID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM advice WHERE role = %s', (roleID,))
+    cursor.execute('SELECT CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, text AS Advice FROM advice a JOIN user u ON a.user = u.user_id WHERE role = %s', (roleID,))
     
     theData = cursor.fetchall()
     
@@ -63,10 +63,10 @@ def get_roles():
 
 # #------------------------------------------------------------
 # # Retrieves list of resources recommended by {userID}
-@persona1.route('/resources/<int:userID>', methods=['GET'])
-def get_user_resources(userID):
+@persona1.route('/resources/<string:username>', methods=['GET'])
+def get_user_resources(username):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM user_resource ur JOIN resource r ON ur.resource_id = r.resource_id  WHERE user_id = %s', (userID,))
+    cursor.execute('SELECT * FROM user_resource ur JOIN resource r ON ur.resource_id = r.resource_id WHERE username = %s', (username,))
     
     theData = cursor.fetchall()
     
