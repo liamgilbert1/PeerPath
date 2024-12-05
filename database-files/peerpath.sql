@@ -162,8 +162,6 @@ CREATE TABLE IF NOT EXISTS rating (
      rating_id int primary key auto_increment,
      user_id int not null,
      role_id int not null,
-     coordinator_access int not null,
-     admin int not null,
      future_job_score int unsigned not null,
      work_quality_score int unsigned not null,
      manager_score int unsigned not null,
@@ -175,20 +173,12 @@ CREATE TABLE IF NOT EXISTS rating (
      CONSTRAINT fk_rating_role
          FOREIGN KEY (role_id) REFERENCES  role (role_id)
              ON UPDATE cascade ON DELETE cascade,
-     CONSTRAINT fk_rating_admin
-         FOREIGN KEY (admin) REFERENCES  system_admin (admin_id)
-             ON UPDATE cascade ON DELETE restrict,
-     CONSTRAINT fk_rating_coordinator
-         FOREIGN KEY (coordinator_access) REFERENCES  coordinator (coordinator_id)
-             ON UPDATE cascade ON DELETE restrict
 );
 
 CREATE TABLE IF NOT EXISTS review (
     review_id int primary key auto_increment,
     user_id int not null,
     role_id int not null,
-    coordinator_access int not null,
-    admin int not null,
     num_up_votes int unsigned default 0,
     num_down_votes int unsigned default 0,
     comment varchar(1000),
@@ -198,15 +188,7 @@ CREATE TABLE IF NOT EXISTS review (
     CONSTRAINT fk_review_role
         FOREIGN KEY (role_id) REFERENCES role (role_id)
             ON UPDATE cascade ON DELETE cascade,
-    CONSTRAINT fk_review_admin
-        FOREIGN KEY (admin) REFERENCES  system_admin (admin_id)
-            ON UPDATE cascade ON DELETE restrict,
-    CONSTRAINT fk_review_coordinator
-        FOREIGN KEY (coordinator_access) REFERENCES  coordinator (coordinator_id)
-            ON UPDATE cascade ON DELETE restrict
 );
-
-
 
 CREATE TABLE IF NOT EXISTS peer_interaction (
     interaction_id int primary key auto_increment,
@@ -870,107 +852,107 @@ insert into help_request (request_id, user_id, coordinator_requested, date_submi
 insert into help_request (request_id, user_id, coordinator_requested, date_submitted, description, status, admin_id) values (49, 30, 13, '2024-05-26 18:43:20', 'How to follow up professionally after submitting an internship application', 'completed', 20);
 insert into help_request (request_id, user_id, coordinator_requested, date_submitted, description, status, admin_id) values (50, 15, 18, '2024-11-05 22:59:45', 'Benefits of attending university-sponsored internship workshops and events', 'in progress', 16);
 
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (1, 26, 2, 40, 22, 10, 2, 7, 1, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (2, 13, 5, 39, 21, 1, 3, 9, 7, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (3, 29, 25, 27, 27, 1, 1, 5, 5, 3);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (4, 9, 18, 37, 12, 9, 1, 9, 6, 3);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (5, 38, 33, 9, 31, 8, 5, 4, 3, 7);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (6, 20, 20, 20, 28, 4, 4, 7, 1, 1);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (7, 4, 14, 11, 31, 4, 2, 7, 3, 5);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (8, 40, 1, 32, 19, 3, 7, 6, 10, 7);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (9, 27, 33, 21, 16, 7, 8, 6, 8, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (10, 32, 19, 29, 3, 7, 4, 8, 4, 8);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (11, 23, 5, 11, 14, 1, 9, 5, 6, 5);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (12, 21, 31, 8, 1, 2, 10, 5, 8, 9);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (13, 30, 25, 34, 4, 2, 4, 3, 7, 7);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (14, 35, 47, 22, 1, 10, 1, 3, 3, 9);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (15, 11, 36, 24, 13, 3, 6, 8, 2, 5);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (16, 33, 31, 29, 38, 1, 10, 2, 7, 8);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (17, 22, 26, 10, 4, 6, 3, 6, 9, 8);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (18, 19, 18, 33, 17, 3, 7, 4, 10, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (19, 17, 40, 4, 20, 9, 9, 1, 10, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (20, 38, 46, 19, 18, 9, 4, 5, 5, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (21, 33, 43, 39, 30, 5, 4, 7, 7, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (22, 25, 19, 32, 26, 4, 9, 4, 6, 4);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (23, 20, 2, 5, 2, 7, 10, 8, 7, 1);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (24, 34, 40, 40, 29, 3, 6, 3, 8, 8);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (25, 28, 1, 39, 10, 2, 9, 9, 4, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (26, 8, 49, 5, 20, 7, 7, 2, 9, 10);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (27, 5, 2, 30, 24, 10, 10, 3, 10, 10);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (28, 11, 35, 18, 26, 9, 10, 10, 6, 2);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (29, 16, 16, 3, 30, 9, 1, 7, 2, 6);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (30, 24, 13, 38, 25, 9, 1, 5, 3, 4);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (31, 23, 24, 40, 32, 3, 3, 1, 3, 10);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (32, 33, 21, 14, 27, 9, 8, 7, 8, 4);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (33, 14, 32, 2, 11, 3, 4, 4, 4, 3);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (34, 2, 5, 20, 17, 7, 4, 10, 6, 1);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (35, 31, 39, 2, 19, 10, 10, 5, 10, 1);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (36, 40, 15, 35, 16, 3, 7, 3, 2, 4);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (37, 6, 45, 35, 18, 3, 5, 10, 7, 7);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (38, 39, 9, 22, 38, 3, 1, 6, 8, 8);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (39, 24, 2, 15, 6, 8, 7, 6, 7, 8);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (40, 22, 14, 27, 11, 1, 5, 5, 7, 5);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (41, 7, 23, 10, 32, 9, 7, 4, 5, 3);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (42, 9, 31, 23, 20, 9, 8, 7, 4, 1);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (43, 2, 35, 32, 35, 8, 8, 7, 3, 6);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (44, 7, 46, 17, 33, 7, 7, 3, 3, 1);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (45, 23, 40, 21, 34, 3, 10, 10, 9, 3);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (46, 5, 11, 36, 30, 9, 8, 10, 4, 3);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (47, 13, 28, 13, 5, 4, 10, 2, 3, 10);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (48, 18, 39, 39, 30, 1, 6, 1, 10, 9);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (49, 2, 9, 1, 28, 9, 4, 4, 7, 7);
-insert into rating (rating_id, user_id, role_id, coordinator_access, admin, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (50, 20, 10, 29, 38, 9, 9, 9, 10, 6);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (1, 26, 2, 10, 2, 7, 1, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (2, 13, 5, 1, 3, 9, 7, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (3, 29, 25, 1, 1, 5, 5, 3);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (4, 9, 18, 9, 1, 9, 6, 3);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (5, 38, 33, 8, 5, 4, 3, 7);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (6, 20, 20, 4, 4, 7, 1, 1);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (7, 4, 14, 4, 2, 7, 3, 5);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (8, 40, 1, 3, 7, 6, 10, 7);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (9, 27, 33, 7, 8, 6, 8, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (10, 32, 19, 7, 4, 8, 4, 8);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (11, 23, 5, 1, 9, 5, 6, 5);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (12, 21, 31, 2, 10, 5, 8, 9);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (13, 30, 25, 2, 4, 3, 7, 7);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (14, 35, 47, 10, 1, 3, 3, 9);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (15, 11, 36, 3, 6, 8, 2, 5);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (16, 33, 31, 1, 10, 2, 7, 8);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (17, 22, 26, 6, 3, 6, 9, 8);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (18, 19, 18, 3, 7, 4, 10, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (19, 17, 40, 9, 9, 1, 10, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (20, 38, 46, 9, 4, 5, 5, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (21, 33, 43, 5, 4, 7, 7, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (22, 25, 19, 4, 9, 4, 6, 4);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (23, 20, 2, 7, 10, 8, 7, 1);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (24, 34, 40, 3, 6, 3, 8, 8);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (25, 28, 1, 2, 9, 9, 4, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (26, 8, 49, 7, 7, 2, 9, 10);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (27, 5, 2, 10, 10, 3, 10, 10);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (28, 11, 35, 9, 10, 10, 6, 2);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (29, 16, 16, 9, 1, 7, 2, 6);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (30, 24, 13, 9, 1, 5, 3, 4);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (31, 23, 24, 3, 3, 1, 3, 10);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (32, 33, 21, 9, 8, 7, 8, 4);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (33, 14, 32, 3, 4, 4, 4, 3);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (34, 2, 5, 7, 4, 10, 6, 1);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (35, 31, 39, 10, 10, 5, 10, 1);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (36, 40, 15, 3, 7, 3, 2, 4);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (37, 6, 45, 3, 5, 10, 7, 7);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (38, 39, 9, 3, 1, 6, 8, 8);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (39, 24, 2, 8, 7, 6, 7, 8);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (40, 22, 14, 1, 5, 5, 7, 5);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (41, 7, 23, 9, 7, 4, 5, 3);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (42, 9, 31, 9, 8, 7, 4, 1);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (43, 2, 35, 8, 8, 7, 3, 6);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (44, 7, 46, 7, 7, 3, 3, 1);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (45, 23, 40, 3, 10, 10, 9, 3);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (46, 5, 11, 9, 8, 10, 4, 3);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (47, 13, 28, 4, 10, 2, 3, 10);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (48, 18, 39, 1, 6, 1, 10, 9);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (49, 2, 9, 9, 4, 4, 7, 7);
+insert into rating (rating_id, user_id, role_id, future_job_score, work_quality_score, manager_score, salary_score, lifestyle_score) values (50, 20, 10, 9, 9, 9, 10, 6);
 
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (1, 37, 29, 29, 6, 88, 40, 'I gained valuable insights into data analysis but some of the tasks felt like busywork');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (2, 37, 36, 3, 25, 100, 23, 'The mentorship I received was top-notch and helped me build a solid foundation for my career');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (3, 5, 26, 25, 39, 13, 11, 'I would recommend this internship to others especially those interested in tech as it provided lots of learning opportunities');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (4, 5, 2, 39, 17, 56, 55, 'The internship offered a deep dive into industry practices but I would have appreciated more opportunities for innovation');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (5, 39, 25, 1, 19, 58, 30, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (6, 37, 9, 35, 2, 64, 23, 'The company offered an excellent learning environment but the work was mostly administrative and less technical');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (7, 40, 16, 24, 7, 4, 37, 'The co-op program offered a balanced combination of experience in technical skills and business knowledge');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (8, 1, 24, 32, 10, 72, 61, 'My internship gave me a sense of the work culture at the company and it was a very positive environment');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (9, 27, 8, 14, 9, 38, 79, 'The mentorship I received was top-notch and helped me build a solid foundation for my career');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (10, 12, 22, 1, 14, 96, 74, 'I had the chance to work with a diverse team which expanded my understanding of different work styles');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (11, 28, 31, 4, 12, 89, 59, 'The internship was well-organized and I received continuous feedback to improve my skills');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (12, 3, 17, 31, 2, 92, 99, 'The company offered an excellent learning environment but the work was mostly administrative and less technical');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (13, 4, 20, 25, 30, 50, 38, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (14, 19, 31, 35, 36, 2, 45, 'The internship was well-organized and I received continuous feedback to improve my skills');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (15, 37, 7, 3, 14, 97, 68, 'The internship program had a great mentorship structure which helped me grow professionally');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (16, 3, 23, 39, 3, 38, 50, 'The internship offered a deep dive into industry practices but I would have appreciated more opportunities for innovation');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (17, 26, 30, 36, 8, 45, 1, 'The internship gave me exposure to both technical and business aspects of the field which was very valuable');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (18, 10, 40, 5, 16, 79, 1, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (19, 32, 16, 22, 14, 70, 39, 'The internship provided valuable exposure to industry tools and technologies that I had not used before');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (20, 17, 20, 28, 3, 4, 64, 'I had the opportunity to work on high-impact projects and contribute directly to the company’s success');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (21, 34, 34, 4, 28, 95, 27, 'I had the opportunity to work on high-impact projects and contribute directly to the company’s success');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (22, 12, 32, 32, 40, 14, 71, 'I learned a lot from the variety of tasks but some assignments felt disconnected from my career goals');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (23, 35, 6, 26, 9, 46, 62, 'The internship allowed me to network with professionals which has been invaluable for my career');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (24, 20, 31, 32, 29, 41, 68, 'The internship was a great way to build my resume but I was hoping for more real-world problem-solving tasks');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (25, 10, 30, 1, 33, 33, 49, 'My internship gave me a sense of the work culture at the company and it was a very positive environment');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (26, 15, 39, 26, 39, 13, 48, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (27, 28, 9, 10, 22, 3, 62, 'The co-op program offered a balanced combination of experience in technical skills and business knowledge');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (28, 19, 33, 1, 14, 53, 86, 'The internship allowed me to gain a hands-on understanding of project management which was incredibly useful');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (29, 1, 19, 21, 20, 71, 48, 'I gained valuable insights into data analysis but some of the tasks felt like busywork');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (30, 34, 34, 17, 12, 76, 18, 'My internship gave me a sense of the work culture at the company and it was a very positive environment');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (31, 3, 33, 1, 2, 6, 59, 'I appreciated the work-life balance and flexibility offered during the internship');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (32, 24, 29, 36, 11, 83, 86, 'I was able to apply my coding skills in real-world projects but the pace was a bit overwhelming at times');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (33, 1, 22, 25, 29, 89, 100, 'The co-op program provided real-world business experience that was instrumental in shaping my career');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (34, 40, 23, 2, 6, 76, 86, 'The internship was well-organized and I received continuous feedback to improve my skills');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (35, 15, 25, 20, 13, 44, 48, 'The projects I worked on had a significant impact making the experience very rewarding');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (36, 28, 37, 7, 2, 37, 62, 'I had a fantastic experience and would love to return to the company in the future');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (37, 35, 37, 8, 29, 34, 90, 'The internship allowed me to gain a hands-on understanding of project management which was incredibly useful');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (38, 4, 6, 22, 10, 87, 62, 'I learned more about networking and communication skills during my time at the internship');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (39, 18, 22, 29, 14, 86, 10, 'The internship provided hands-on experience that allowed me to apply classroom knowledge in real-world scenarios');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (40, 21, 30, 22, 24, 18, 21, 'I had the chance to work with a diverse team which expanded my understanding of different work styles');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (41, 15, 3, 16, 11, 84, 81, 'The internship was a great introduction to the corporate world but I wish I had more complex assignments');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (42, 22, 29, 31, 22, 22, 34, 'The internship was well-organized and I received continuous feedback to improve my skills');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (43, 34, 22, 34, 26, 90, 38, 'The team was welcoming and I gained valuable insights into the tech industry through challenging tasks');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (44, 6, 40, 27, 11, 41, 88, 'I gained valuable insights into data analysis but some of the tasks felt like busywork');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (45, 2, 19, 29, 28, 49, 2, 'The internship provided hands-on experience that allowed me to apply classroom knowledge in real-world scenarios');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (46, 10, 26, 2, 13, 60, 25, 'The projects I worked on had a significant impact making the experience very rewarding');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (47, 16, 10, 7, 11, 94, 71, 'The internship was a great introduction to the corporate world but I wish I had more complex assignments');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (48, 34, 1, 28, 35, 81, 34, 'The internship allowed me to gain a hands-on understanding of project management which was incredibly useful');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (49, 15, 8, 34, 32, 85, 67, 'The management team was always available for guidance which made a huge difference in my development');
-insert into review (review_id, user_id, role_id, coordinator_access, admin, num_up_votes, num_down_votes, comment) values (50, 4, 26, 12, 4, 76, 14, 'The internship was well-organized and I received continuous feedback to improve my skills');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (1, 37, 29, 88, 40, 'I gained valuable insights into data analysis but some of the tasks felt like busywork');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (2, 37, 36, 100, 23, 'The mentorship I received was top-notch and helped me build a solid foundation for my career');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (3, 5, 26, 13, 11, 'I would recommend this internship to others especially those interested in tech as it provided lots of learning opportunities');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (4, 5, 2, 56, 55, 'The internship offered a deep dive into industry practices but I would have appreciated more opportunities for innovation');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (5, 39, 25, 58, 30, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (6, 37, 9, 64, 23, 'The company offered an excellent learning environment but the work was mostly administrative and less technical');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (7, 40, 16, 4, 37, 'The co-op program offered a balanced combination of experience in technical skills and business knowledge');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (8, 1, 24, 72, 61, 'My internship gave me a sense of the work culture at the company and it was a very positive environment');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (9, 27, 8, 38, 79, 'The mentorship I received was top-notch and helped me build a solid foundation for my career');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (10, 12, 22, 96, 74, 'I had the chance to work with a diverse team which expanded my understanding of different work styles');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (11, 28, 31, 89, 59, 'The internship was well-organized and I received continuous feedback to improve my skills');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (12, 3, 17, 92, 99, 'The company offered an excellent learning environment but the work was mostly administrative and less technical');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (13, 4, 20, 50, 38, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (14, 19, 31, 2, 45, 'The internship was well-organized and I received continuous feedback to improve my skills');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (15, 37, 7, 97, 68, 'The internship program had a great mentorship structure which helped me grow professionally');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (16, 3, 23, 38, 50, 'The internship offered a deep dive into industry practices but I would have appreciated more opportunities for innovation');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (17, 26, 30, 45, 1, 'The internship gave me exposure to both technical and business aspects of the field which was very valuable');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (18, 10, 40, 79, 1, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (19, 32, 16, 70, 39, 'The internship provided valuable exposure to industry tools and technologies that I had not used before');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (20, 17, 20, 4, 64, 'I had the opportunity to work on high-impact projects and contribute directly to the company’s success');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (21, 34, 34, 95, 27, 'I had the opportunity to work on high-impact projects and contribute directly to the company’s success');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (22, 12, 32, 14, 71, 'I learned a lot from the variety of tasks but some assignments felt disconnected from my career goals');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (23, 35, 6, 46, 62, 'The internship allowed me to network with professionals which has been invaluable for my career');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (24, 20, 31, 41, 68, 'The internship was a great way to build my resume but I was hoping for more real-world problem-solving tasks');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (25, 10, 30, 33, 49, 'My internship gave me a sense of the work culture at the company and it was a very positive environment');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (26, 15, 39, 13, 48, 'My supervisor was supportive offering constructive criticism that helped me improve my work');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (27, 28, 9, 3, 62, 'The co-op program offered a balanced combination of experience in technical skills and business knowledge');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (28, 19, 33, 53, 86, 'The internship allowed me to gain a hands-on understanding of project management which was incredibly useful');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (29, 1, 19, 71, 48, 'I gained valuable insights into data analysis but some of the tasks felt like busywork');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (30, 34, 34, 76, 18, 'My internship gave me a sense of the work culture at the company and it was a very positive environment');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (31, 3, 33, 6, 59, 'I appreciated the work-life balance and flexibility offered during the internship');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (32, 24, 29, 83, 86, 'I was able to apply my coding skills in real-world projects but the pace was a bit overwhelming at times');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (33, 1, 22, 89, 100, 'The co-op program provided real-world business experience that was instrumental in shaping my career');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (34, 40, 23, 76, 86, 'The internship was well-organized and I received continuous feedback to improve my skills');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (35, 15, 25, 44, 48, 'The projects I worked on had a significant impact making the experience very rewarding');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (36, 28, 37, 37, 62, 'I had a fantastic experience and would love to return to the company in the future');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (37, 35, 37, 34, 90, 'The internship allowed me to gain a hands-on understanding of project management which was incredibly useful');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (38, 4, 6, 87, 62, 'I learned more about networking and communication skills during my time at the internship');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (39, 18, 22, 86, 10, 'The internship provided hands-on experience that allowed me to apply classroom knowledge in real-world scenarios');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (40, 21, 30, 18, 21, 'I had the chance to work with a diverse team which expanded my understanding of different work styles');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (41, 15, 3, 84, 81, 'The internship was a great introduction to the corporate world but I wish I had more complex assignments');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (42, 22, 29, 22, 34, 'The internship was well-organized and I received continuous feedback to improve my skills');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (43, 34, 22, 90, 38, 'The team was welcoming and I gained valuable insights into the tech industry through challenging tasks');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (44, 6, 40, 41, 88, 'I gained valuable insights into data analysis but some of the tasks felt like busywork');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (45, 2, 19, 49, 2, 'The internship provided hands-on experience that allowed me to apply classroom knowledge in real-world scenarios');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (46, 10, 26, 60, 25, 'The projects I worked on had a significant impact making the experience very rewarding');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (47, 16, 10, 94, 71, 'The internship was a great introduction to the corporate world but I wish I had more complex assignments');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (48, 34, 1, 81, 34, 'The internship allowed me to gain a hands-on understanding of project management which was incredibly useful');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (49, 15, 8, 85, 67, 'The management team was always available for guidance which made a huge difference in my development');
+insert into review (review_id, user_id, role_id, num_up_votes, num_down_votes, comment) values (50, 4, 26, 76, 14, 'The internship was well-organized and I received continuous feedback to improve my skills');
 
 insert into peer_interaction (interaction_id, user_id, peer_user_id, date_time, topic) values (1, 31, 10, '2024-02-08 19:37:52', 'Behavioral interview preparation');
 insert into peer_interaction (interaction_id, user_id, peer_user_id, date_time, topic) values (2, 34, 36, '2024-07-31 02:33:33', 'Learning version control with Git');
