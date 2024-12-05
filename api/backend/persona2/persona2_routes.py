@@ -66,9 +66,12 @@ Routes to make:
 def add_advice(roleID):
     cursor = db.get_db().cursor()
     data = request.get_json()
+
     if not data or 'advice' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
+    
     cursor.execute('INSERT INTO advice (role, advice) VALUES (%s, %s)', (roleID, data['advice']))
+
     db.get_db().commit()
     return make_response(jsonify({"message": "Advice added successfully"}), 200)
 
@@ -78,9 +81,12 @@ def add_advice(roleID):
 def add_resource(userID):
     cursor = db.get_db().cursor()
     data = request.get_json()
+
     if not data or 'resource' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
+    
     cursor.execute('INSERT INTO user_resource (user_id, resource_id) VALUES (%s, %s)', (userID, data['resource']))
+
     db.get_db().commit()
     return make_response(jsonify({"message": "Resource added successfully"}), 200)
 
@@ -91,9 +97,12 @@ def add_resource(userID):
 def add_rating(userID, employerID):
     cursor = db.get_db().cursor()
     data = request.get_json()
+
     if not data or 'rating' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
+    
     cursor.execute('INSERT INTO rating (user_id, employer_id, rating) VALUES (%s, %s, %s)', (userID, employerID, data['rating']))
+
     db.get_db().commit()
     return make_response(jsonify({"message": "Rating added successfully"}), 200)
 
@@ -103,9 +112,12 @@ def add_rating(userID, employerID):
 def edit_rating(userID, employerID):
     cursor = db.get_db().cursor()
     data = request.get_json()
+
     if not data or 'rating' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
+    
     cursor.execute('UPDATE rating SET rating = %s WHERE user_id = %s AND employer_id = %s', (data['rating'], userID, employerID))
+    
     db.get_db().commit()
     return make_response(jsonify({"message": "Rating updated successfully"}), 200)
 
@@ -115,7 +127,12 @@ def edit_rating(userID, employerID):
 @persona2.route('/users/<int:userID>/ratings/<int:employerID>', methods=['DELETE'])
 def delete_rating(userID, employerID):
     cursor = db.get_db().cursor()
+    
     cursor.execute('DELETE FROM rating WHERE user_id = %s AND employer_id = %s', (userID, employerID))
+    
+    if cursor.rowcount == 0:
+        return make_response(jsonify({"error": "No matching rating found to delete"}), 404)
+    
     db.get_db().commit()
     return make_response(jsonify({"message": "Rating deleted successfully"}), 200)
 
@@ -125,9 +142,12 @@ def delete_rating(userID, employerID):
 def add_answer(questionID):
     cursor = db.get_db().cursor()
     data = request.get_json()
+
     if not data or 'answer' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
+    
     cursor.execute('INSERT INTO answer (question_id, answer) VALUES (%s, %s)', (questionID, data['answer']))
+
     db.get_db().commit()
     return make_response(jsonify({"message": "Answer added successfully"}), 200)
 
@@ -137,8 +157,11 @@ def add_answer(questionID):
 def add_review(userID):
     cursor = db.get_db().cursor()
     data = request.get_json()
+
     if not data or 'review' not in data:
+
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     cursor.execute('INSERT INTO review (user_id, review) VALUES (%s, %s)', (userID, data['review']))
+    
     db.get_db().commit()
     return make_response(jsonify({"message": "Review added successfully"}), 200)
