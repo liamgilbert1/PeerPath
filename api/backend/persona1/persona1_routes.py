@@ -66,7 +66,7 @@ def get_roles():
 @persona1.route('/resources/<string:username>', methods=['GET'])
 def get_user_resources(username):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM user_resource ur JOIN resource r ON ur.resource_id = r.resource_id WHERE username = %s', (username,))
+    cursor.execute('SELECT r.title AS Resource, r.link AS Link, r.description AS Description FROM user_resource ur JOIN resource r ON ur.resource_id = r.resource_id JOIN user u ON u.user_id = ur.user_id WHERE u.username = %s', (username,))
     
     theData = cursor.fetchall()
     
