@@ -17,22 +17,11 @@ def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Persona 1 ------------------------
+def Persona1HomeNav():
     st.sidebar.page_link(
         "pages/Jerry_Home.py", label="Jerry's Home Page", icon="👤"
     )
-
-
-def WorldBankVizNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
-
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
-
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():
@@ -80,12 +69,9 @@ def SideBarLinks(show_home=False):
 
     # Show the other page navigators depending on the id of the user/coordinator/system admin
     if st.session_state["authenticated"]:
-
         # Show ___ and ___ if the user_id = 1.
         if st.session_state["user_id"] == 1:
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+            Persona1HomeNav()
 
         # If the user id = 2, show ____.
         if st.session_state["user_id"] == 2:
