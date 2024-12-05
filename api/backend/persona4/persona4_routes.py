@@ -173,18 +173,32 @@ def get_user():
     the_response.status_code = 200
     return the_response
 
-
 @persona4.route('/users/<int:userID>', methods=['DELETE'])
 def delete_user(userID):
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM user WHERE user_id= %s', (userID,))
+    cursor.execute('DELETE FROM user WHERE user_id= %s', (userID))
+    db.get_db().commit()
     return make_response(jsonify({"message": "User deleted successfully"}), 200)
+
+@persona4.route('/advice', methods=['GET'])
+def get_advice():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT advice_id as Advice_ID, CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, text AS Advice FROM advice a JOIN user u ON a.user = u.user_id')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "RIP"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
 
 
 @persona4.route('/advice/<int:roleID>', methods=['GET'])
 def get_role_advice(roleID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, text AS Advice FROM advice a JOIN user u ON a.user = u.user_id WHERE role = %s', (roleID,))
+    cursor.execute('SELECT advice_id as Advice_ID, CONCAT(u.first_name, " ", u.last_name) AS Peer, u.username AS Username, role AS Position, text AS Advice FROM advice a JOIN user u ON a.user = u.user_id WHERE role = %s', (roleID,))
     
     theData = cursor.fetchall()
     
@@ -197,9 +211,16 @@ def get_role_advice(roleID):
 
 
 
-@persona4.route('/advice/monitor/<int:adviceID>', methods=['DELETE'])
-def delete_advice(roleID):
+@persona4.route('/advice/<int:adviceID>', methods=['DELETE'])
+def delete_advice(adviceID):
     cursor = db.get_db().cursor()
-    cursor.execute('DELETE FROM advice WHERE advice_id = %s', (adviceID,))
-    return make_response(jsonify({"message": "Advice deleted successfully"}), 200)
 
+    sql_query = '''
+        DELETE FROM advice
+        WHERE advice_id = %s;
+    '''
+
+    cursor.execute(sql_query, (adviceID))
+
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Advice deleted successfully"}), 200)
