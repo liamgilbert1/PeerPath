@@ -7,9 +7,9 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-st.write("# Edit Rating")
+st.write("# Delete Rating")
 
 '''
-Use this page to edit a rating you have made.
+Use this page to delete a rating you have made.
 '''
 
