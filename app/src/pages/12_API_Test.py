@@ -81,6 +81,40 @@ def add_note(decisionmakerID, note_text, employer_id):
 if st.button("Add"):
   add_note(1, note_text, employer_id)
 
+
+data34 = {}
+try:
+  data34 = requests.get('http://api:4000/3/notes/2').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  data34 = [{"a": "123", "b": "hello"}, {"a": "456", "b": "goodbye"}]
+
+current_note = [item.get("note", "") for item in data34][0]
+current_employer_id = [item.get("employer_id", "") for item in data34][0]
+
+note = st.text_area("Note:", value=current_note)
+employer_id = st.text_input("Employer ID:", value=current_employer_id)
+
+def update_note(decisionmakerID, noteID, note_text, employer_id):
+  try:
+    payload = {
+      "note": note_text,
+      "employer_id": employer_id if employer_id else None
+    }
+    response = requests.put(
+      f'http://api:4000/3/notes/{decisionmakerID}/{noteID}',
+      json = payload
+    )
+    if response.status_code == 200:
+      st.success("Note updated successfully!")
+    else:
+      st.error(f"Failed to update note: {response.text}")
+  except Exception as e:
+    st.error(f"An error occurred: {e}")
+
+if st.button("Update"):
+  update_note(1, 1, note, employer_id)
+
 data35 = {}
 try:
   data35 = requests.get('http://api:4000/3/ratings/1').json()
