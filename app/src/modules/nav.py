@@ -47,11 +47,8 @@ def Persona3HomeNav():
     )
 
 #### ------------------------ System Admin Role ------------------------
-def AdminPageNav():
+def Persona4HomeNav():
     st.sidebar.page_link("pages/Phil_Home.py", label="Phil's Home Page", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -86,6 +83,12 @@ def SideBarLinks(show_home=False):
         # If the coordinator id is 1, show ___.
         if st.session_state["coordinator_id"] == 1:
             Persona3HomeNav()
+        
+        # If the admin id is 1, show ___.
+        if st.session_state["admin_id"] == 1:
+            Persona4HomeNav()
+        
+
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()

@@ -5,6 +5,7 @@ from backend.customers.customer_routes import customers
 from backend.persona1.persona1_routes import persona1
 from backend.persona2.persona2_routes import persona2
 from backend.persona3.persona3_routes import persona3
+from backend.persona4.persona4_routes import persona4
 from backend.products.products_routes import products
 from backend.simple.simple_routes import simple_routes
 import os
@@ -46,6 +47,7 @@ def create_app():
     app.register_blueprint(persona1,   url_prefix='/c')
     app.register_blueprint(persona2,    url_prefix='/p')
     app.register_blueprint(persona3,   url_prefix='/3')
+    app.register_blueprint(persona4,   url_prefix='/4')
 
     # Don't forget to return the app object
     return app
