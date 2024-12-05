@@ -14,8 +14,15 @@ persona4 = Blueprint('persona4', __name__)
 @persona4.route('/hourlyactivity', methods=['GET'])
 def get_hourly_acitivty():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM hourly_activity')
+   
     
+    query = '''
+    SELECT activity_id, CONCAT(first_name, ' ', last_name) as name, user_id, date_time, min_per_hr_online, pages_visited 
+    FROM hourly_activity NATURAL JOIN user 
+    '''
+
+    cursor.execute(query)
+
     theData = cursor.fetchall()
     
     if not theData:
