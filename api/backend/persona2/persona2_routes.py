@@ -172,10 +172,13 @@ def add_answer(questionID):
     cursor = db.get_db().cursor()
     data = request.get_json()
 
+    user_id = data['user_id']
+    answer = data['answer']
+
     if not data or 'answer' not in data:
         return make_response(jsonify({"error": "Invalid input data"}), 400)
     
-    cursor.execute('INSERT INTO answer (answer) VALUES (%s, %s)', (data['answer']))
+    cursor.execute('INSERT INTO answer (answer, user, question) VALUES (%s, %s, %s)', (answer, user_id, questionID))
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Answer added successfully"}), 200)
@@ -194,3 +197,19 @@ def add_review(userID):
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Review added successfully"}), 200)
+
+# Show all questions and questionID
+# /questions
+@persona2.route('/questions', methods=['GET'])
+def get_questions():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT question_id AS "Question ID", question_text AS "Question" FROM question')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "No questions found"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
