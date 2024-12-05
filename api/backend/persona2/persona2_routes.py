@@ -31,6 +31,7 @@ persona2 = Blueprint('persona2', __name__)
 #     the_response.status_code = 200
 #     return the_response
 
+'''
 @persona2.route('user/<int:userID>', methods=['GET'])
 def get_following(userID):
     cursor = db.get_db().cursor()
@@ -44,4 +45,100 @@ def get_following(userID):
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+'''
 
+'''
+Routes to make:
+- Add advice for roleID
+- Add resource for userID
+- Add rating for userID on employerID
+- Edit rating
+- Delete rating on employerID
+- Joe did: add friend
+- Joe did: delete friend
+- Add answer to question
+- Add new review
+'''
+
+# Add advice for roleID (post)
+# /advice/{roleID}
+@persona2.route('/advice/<int:roleID>', methods=['POST'])
+def add_advice(roleID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'advice' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO advice (role, advice) VALUES (%s, %s)', (roleID, data['advice']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Advice added successfully"}), 200)
+
+# Add resource for userID (post)
+# /resources/{userID}
+@persona2.route('/resources/<int:userID>', methods=['POST'])
+def add_resource(userID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'resource' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO user_resource (user_id, resource_id) VALUES (%s, %s)', (userID, data['resource']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Resource added successfully"}), 200)
+
+
+# Add rating for userID on employerID (post)
+# /users/{userID}/ratings/{employerID}
+@persona2.route('/users/<int:userID>/ratings/<int:employerID>', methods=['POST'])
+def add_rating(userID, employerID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'rating' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO rating (user_id, employer_id, rating) VALUES (%s, %s, %s)', (userID, employerID, data['rating']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Rating added successfully"}), 200)
+
+# Edit existing rating (put)
+# /users/{userID}/ratings/{employerID}
+@persona2.route('/users/<int:userID>/ratings/<int:employerID>', methods=['PUT'])
+def edit_rating(userID, employerID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'rating' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('UPDATE rating SET rating = %s WHERE user_id = %s AND employer_id = %s', (data['rating'], userID, employerID))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Rating updated successfully"}), 200)
+
+
+# Delete rating on employerID (delete)
+# /users/{userID}/ratings/{employerID}
+@persona2.route('/users/<int:userID>/ratings/<int:employerID>', methods=['DELETE'])
+def delete_rating(userID, employerID):
+    cursor = db.get_db().cursor()
+    cursor.execute('DELETE FROM rating WHERE user_id = %s AND employer_id = %s', (userID, employerID))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Rating deleted successfully"}), 200)
+
+# Add answer to question (post)
+# /questions/{questionID}/answers
+@persona2.route('/questions/<int:questionID>/answers', methods=['POST'])
+def add_answer(questionID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'answer' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO answer (question_id, answer) VALUES (%s, %s)', (questionID, data['answer']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Answer added successfully"}), 200)
+
+# Add new review for userID (post)
+# /reviews/{userID}
+@persona2.route('/reviews/<int:userID>', methods=['POST'])
+def add_review(userID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'review' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO review (user_id, review) VALUES (%s, %s)', (userID, data['review']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Review added successfully"}), 200)
