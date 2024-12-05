@@ -108,3 +108,13 @@ def edit_rating(userID, employerID):
     cursor.execute('UPDATE rating SET rating = %s WHERE user_id = %s AND employer_id = %s', (data['rating'], userID, employerID))
     db.get_db().commit()
     return make_response(jsonify({"message": "Rating updated successfully"}), 200)
+
+
+# Delete rating on employerID (delete)
+# /users/{userID}/ratings/{employerID}
+@persona2.route('/users/<int:userID>/ratings/<int:employerID>', methods=['DELETE'])
+def delete_rating(userID, employerID):
+    cursor = db.get_db().cursor()
+    cursor.execute('DELETE FROM rating WHERE user_id = %s AND employer_id = %s', (userID, employerID))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Rating deleted successfully"}), 200)
