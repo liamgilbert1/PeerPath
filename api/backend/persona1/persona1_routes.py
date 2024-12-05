@@ -82,7 +82,7 @@ def get_user_resources(username):
 @persona1.route('/ratings/<int:employerID>', methods=['GET'])
 def get_employer_ratings(employerID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM rating ra JOIN role ro ON ra.role_id = ro.role_id WHERE ro.employer = %s', (employerID,))
+    cursor.execute('SELECT future_job_score AS "Future Job Score", lifestyle_score AS "Lifestyle Score", manager_score AS "Manager Score", salary_score AS "Salary Score", work_quality_score AS "Work Quality Score" FROM rating ra JOIN role ro ON ra.role_id = ro.role_id WHERE ro.employer = %s', (employerID,))
     
     theData = cursor.fetchall()
     
@@ -94,11 +94,14 @@ def get_employer_ratings(employerID):
     return the_response
 
 # #------------------------------------------------------------
-#Retrieves list of reviews made for {employerID}
+# Retrieves list of reviews made for {employerID}
 @persona1.route('/reviews/<int:employerID>', methods=['GET'])
 def get_employer_reviews(employerID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM review re JOIN role ro ON re.role_id = ro.role_id WHERE ro.employer = %s', (employerID,))
+    cursor.execute(
+        'SELECT * FROM review re JOIN role ro ON re.role_id = ro.role_id WHERE ro.employer = %s', 
+        (employerID,)
+    )
     
     theData = cursor.fetchall()
     
