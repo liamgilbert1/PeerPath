@@ -28,3 +28,18 @@ if st.button("View Classification Demo",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/13_Classification.py')
+
+if st.button("Find and View Users",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Users.py')
+
+if st.button("Retrieve Ratings",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Ratings.py')
+
+if st.button("Manage Notes",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Notes.py')
