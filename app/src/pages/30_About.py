@@ -8,11 +8,12 @@ st.write("# About this App")
 
 st.markdown (
     """
-    This is a demo app for CS 3200 Course Project.  
+    PeerPath is your one-stop shop for all things co-op and career related.
 
-    The goal of this demo is to provide information on the tech stack 
-    being used as well as demo some of the features of the various platforms. 
+    Here, you can find resources, ask questions, and get advice from your peers.
 
-    Stay tuned for more information and features to come!
+    We want to make the stressful process of co-op easier and less intimidating.
+
+    We hope you enjoy PeerPath!
     """
         )
