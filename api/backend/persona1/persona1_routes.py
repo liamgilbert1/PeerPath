@@ -45,6 +45,22 @@ def get_role_advice(roleID):
     the_response.status_code = 200
     return the_response
 
+#------------------------------------------------------------
+# Retrieves all of the roles and their id's
+@persona1.route('/roles', methods=['GET'])
+def get_roles():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT title AS Position, e.name AS Employer, role_id AS ID FROM role r JOIN employer e ON r.employer = e.employer_id ORDER BY role_id')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve roles"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
 # #------------------------------------------------------------
 # # Retrieves list of resources recommended by {userID}
 @persona1.route('/resources/<int:userID>', methods=['GET'])
