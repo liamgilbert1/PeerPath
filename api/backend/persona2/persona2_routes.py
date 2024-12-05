@@ -34,7 +34,7 @@ persona2 = Blueprint('persona2', __name__)
 @persona2.route('user/<int:userID>', methods=['GET'])
 def get_following(userID):
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT first_name AS "First Name", last_name AS "Last Name", username AS "Username", student_type AS "Year", activity_status AS "Activity Status", search_status AS "Search Status" FROM user u JOIN friendship f ON u.user_id = f.friend_id WHERE f.user_id = %s', (userID,))
+    cursor.execute('SELECT first_name AS "First Name", last_name AS "Last Name", username AS "Username", student_type AS "Year", activity_status AS "Activity Status", search_status AS "Search Status", urgency_status AS "Urgency Status" FROM user u JOIN friendship f ON u.user_id = f.friend_id WHERE f.user_id = %s', (userID,))
     
     theData = cursor.fetchall()
 
