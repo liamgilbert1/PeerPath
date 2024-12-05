@@ -71,3 +71,15 @@ def add_advice(roleID):
     cursor.execute('INSERT INTO advice (role, advice) VALUES (%s, %s)', (roleID, data['advice']))
     db.get_db().commit()
     return make_response(jsonify({"message": "Advice added successfully"}), 200)
+
+# Add resource for userID (post)
+# /resources/{userID}
+@persona2.route('/resources/<int:userID>', methods=['POST'])
+def add_resource(userID):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+    if not data or 'resource' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    cursor.execute('INSERT INTO user_resource (user_id, resource_id) VALUES (%s, %s)', (userID, data['resource']))
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Resource added successfully"}), 200)
