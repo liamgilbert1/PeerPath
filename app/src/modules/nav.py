@@ -14,7 +14,7 @@ def HomeNav():
 
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/About.py", label="About", icon="🧠")
 
 
 #### ------------------------ Persona 1 ------------------------
@@ -23,30 +23,18 @@ def Persona1HomeNav():
         "pages/Jerry_Home.py", label="Jerry's Home Page", icon="👤"
     )
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
-
-
-def PredictionNav():
+## -------------------------- Persona 2 ------------------------
+def Persona2HomeNav():
     st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
+        "pages/Jordan_Home.py", label="Jordan's Home Page", icon="👤")
 
-
-def ClassificationNav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
-
-
-# TODO - make page link for stacy
+## -------------------------- Persona 3 ------------------------
 def Persona3HomeNav():
     st.sidebar.page_link(
         "pages/Stacy_Home.py", label="Stacy's Home Page", icon="👤"
     )
 
-#### ------------------------ System Admin Role ------------------------
+#### ------------------------ Persona 4 ------------------------
 def Persona4HomeNav():
     st.sidebar.page_link("pages/Phil_Home.py", label="Phil's Home Page", icon="🖥️")
 
@@ -76,9 +64,7 @@ def SideBarLinks(show_home=False):
 
         # If the user id = 2, show ____.
         if st.session_state["user_id"] == 2:
-            PredictionNav()
-            ApiTestNav()
-            ClassificationNav()
+            Persona2HomeNav()
 
         # If the coordinator id is 1, show ___.
         if st.session_state["coordinator_id"] == 1:
