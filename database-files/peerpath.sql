@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS advice (
     advice_id int primary key auto_increment,
     user int not null,
     role int not null,
-    text varchar(500) not null,
+    advice_text varchar(500) not null,
     CONSTRAINT fk_advice_user
         FOREIGN KEY (user) REFERENCES user (user_id)
             ON UPDATE cascade ON DELETE cascade,
@@ -615,56 +615,56 @@ insert into role (role_id, title, employer, description) values (48, 'Cybersecur
 insert into role (role_id, title, employer, description) values (49, 'Business Analyst Intern', 22, 'Collaborate with development and IT teams to streamline deployment processes and improve system efficiency');
 insert into role (role_id, title, employer, description) values (50, 'Cloud Computing Intern', 16, 'Analyze large-scale datasets and create visualizations to support business decision-making');
 
-insert into advice (advice_id, user, role, text) values (1, 15, 11, 'Always ask questions and seek clarity when needed');
-insert into advice (advice_id, user, role, text) values (2, 24, 26, 'Build a strong network your connections can often be just as important as your skills');
-insert into advice (advice_id, user, role, text) values (3, 20, 29, 'Stay up to date with the latest technologies and trends in your field');
-insert into advice (advice_id, user, role, text) values (4, 32, 32, 'Don''t be afraid to fail learn from your mistakes and grow');
-insert into advice (advice_id, user, role, text) values (5, 24, 30, 'Prioritize communication it’s just as important as technical skills');
-insert into advice (advice_id, user, role, text) values (6, 5, 16, 'Never stop learning seek out opportunities to expand your knowledge');
-insert into advice (advice_id, user, role, text) values (7, 16, 18, 'Show initiative and always look for ways to add value');
-insert into advice (advice_id, user, role, text) values (8, 2, 7, 'Don’t wait for opportunities to come to you create them');
-insert into advice (advice_id, user, role, text) values (9, 31, 23, 'Embrace challenges as opportunities to learn and grow');
-insert into advice (advice_id, user, role, text) values (10, 33, 22, 'Be proactive not reactive in your work');
-insert into advice (advice_id, user, role, text) values (11, 23, 15, 'Stay organized and manage your time effectively');
-insert into advice (advice_id, user, role, text) values (12, 24, 45, 'Be open to feedback and use it to improve');
-insert into advice (advice_id, user, role, text) values (13, 3, 6, 'Take ownership of your projects and responsibilities');
-insert into advice (advice_id, user, role, text) values (14, 28, 42, 'Seek mentorship from experienced professionals');
-insert into advice (advice_id, user, role, text) values (15, 35, 28, 'Build a strong portfolio to showcase your skills');
-insert into advice (advice_id, user, role, text) values (16, 40, 30, 'Develop a growth mindset and be adaptable to change');
-insert into advice (advice_id, user, role, text) values (17, 21, 48, 'Stay humble and remember there’s always more to learn');
-insert into advice (advice_id, user, role, text) values (18, 21, 2, 'Practice resilience in the face of setbacks');
-insert into advice (advice_id, user, role, text) values (19, 11, 5, 'Build your personal brand and reputation early on');
-insert into advice (advice_id, user, role, text) values (20, 8, 49, 'Don’t be afraid to ask for help collaboration is key');
-insert into advice (advice_id, user, role, text) values (21, 20, 1, 'Be prepared to work hard and stay dedicated to your goals');
-insert into advice (advice_id, user, role, text) values (22, 7, 29, 'Take the time to understand the company culture and align with it');
-insert into advice (advice_id, user, role, text) values (23, 24, 39, 'Learn to balance work and life to avoid burnout');
-insert into advice (advice_id, user, role, text) values (24, 38, 21, 'Volunteer for projects outside of your regular duties to gain more experience');
-insert into advice (advice_id, user, role, text) values (25, 12, 4, 'Always strive for excellence but understand that perfection isn’t always achievable');
-insert into advice (advice_id, user, role, text) values (26, 5, 48, 'Don’t shy away from difficult tasks tackle them head-on');
-insert into advice (advice_id, user, role, text) values (27, 36, 26, 'Be patient success doesn’t happen overnight');
-insert into advice (advice_id, user, role, text) values (28, 6, 46, 'Focus on developing both technical and soft skills');
-insert into advice (advice_id, user, role, text) values (29, 17, 50, 'Don’t be afraid to take risks in your career');
-insert into advice (advice_id, user, role, text) values (30, 5, 46, 'Be mindful of your professional image both online and offline');
-insert into advice (advice_id, user, role, text) values (31, 18, 10, 'Understand that failure is part of the learning process');
-insert into advice (advice_id, user, role, text) values (32, 27, 34, 'Seek out diverse experiences to broaden your perspective');
-insert into advice (advice_id, user, role, text) values (33, 2, 49, 'Stay curious and never stop asking “why”');
-insert into advice (advice_id, user, role, text) values (34, 33, 48, 'Learn how to negotiate effectively for your salary and benefits');
-insert into advice (advice_id, user, role, text) values (35, 26, 28, 'Practice empathy and emotional intelligence in the workplace');
-insert into advice (advice_id, user, role, text) values (36, 20, 36, 'Find ways to stay motivated when things get tough');
-insert into advice (advice_id, user, role, text) values (37, 15, 10, 'Focus on long-term goals rather than short-term success');
-insert into advice (advice_id, user, role, text) values (38, 39, 26, 'Keep track of your accomplishments and don’t be afraid to share them');
-insert into advice (advice_id, user, role, text) values (39, 25, 38, 'Always be honest and transparent in your communication');
-insert into advice (advice_id, user, role, text) values (40, 25, 15, 'Cultivate a positive attitude and approach challenges with optimism');
-insert into advice (advice_id, user, role, text) values (41, 5, 10, 'Surround yourself with like-minded individuals who inspire you');
-insert into advice (advice_id, user, role, text) values (42, 35, 36, 'Be willing to step outside of your comfort zone and try new things');
-insert into advice (advice_id, user, role, text) values (43, 38, 33, 'Always be learning whether through formal education self-study or on-the-job experience');
-insert into advice (advice_id, user, role, text) values (44, 29, 35, 'Understand the importance of work-life balance and prioritize self-care');
-insert into advice (advice_id, user, role, text) values (45, 21, 30, 'Keep a journal of your professional development and progress');
-insert into advice (advice_id, user, role, text) values (46, 37, 25, 'Always ask questions and seek clarity when needed');
-insert into advice (advice_id, user, role, text) values (47, 2, 12, 'Build a strong network your connections can often be just as important as your skills');
-insert into advice (advice_id, user, role, text) values (48, 2, 30, 'Stay up to date with the latest technologies and trends in your field');
-insert into advice (advice_id, user, role, text) values (49, 32, 36, 'Don''t be afraid to fail learn from your mistakes and grow');
-insert into advice (advice_id, user, role, text) values (50, 10, 5, 'Prioritize communication it’s just as important as technical skills');
+insert into advice (advice_id, user, role, advice_text) values (1, 15, 11, 'Always ask questions and seek clarity when needed');
+insert into advice (advice_id, user, role, advice_text) values (2, 24, 26, 'Build a strong network your connections can often be just as important as your skills');
+insert into advice (advice_id, user, role, advice_text) values (3, 20, 29, 'Stay up to date with the latest technologies and trends in your field');
+insert into advice (advice_id, user, role, advice_text) values (4, 32, 32, 'Don''t be afraid to fail learn from your mistakes and grow');
+insert into advice (advice_id, user, role, advice_text) values (5, 24, 30, 'Prioritize communication it’s just as important as technical skills');
+insert into advice (advice_id, user, role, advice_text) values (6, 5, 16, 'Never stop learning seek out opportunities to expand your knowledge');
+insert into advice (advice_id, user, role, advice_text) values (7, 16, 18, 'Show initiative and always look for ways to add value');
+insert into advice (advice_id, user, role, advice_text) values (8, 2, 7, 'Don’t wait for opportunities to come to you create them');
+insert into advice (advice_id, user, role, advice_text) values (9, 31, 23, 'Embrace challenges as opportunities to learn and grow');
+insert into advice (advice_id, user, role, advice_text) values (10, 33, 22, 'Be proactive not reactive in your work');
+insert into advice (advice_id, user, role, advice_text) values (11, 23, 15, 'Stay organized and manage your time effectively');
+insert into advice (advice_id, user, role, advice_text) values (12, 24, 45, 'Be open to feedback and use it to improve');
+insert into advice (advice_id, user, role, advice_text) values (13, 3, 6, 'Take ownership of your projects and responsibilities');
+insert into advice (advice_id, user, role, advice_text) values (14, 28, 42, 'Seek mentorship from experienced professionals');
+insert into advice (advice_id, user, role, advice_text) values (15, 35, 28, 'Build a strong portfolio to showcase your skills');
+insert into advice (advice_id, user, role, advice_text) values (16, 40, 30, 'Develop a growth mindset and be adaptable to change');
+insert into advice (advice_id, user, role, advice_text) values (17, 21, 48, 'Stay humble and remember there’s always more to learn');
+insert into advice (advice_id, user, role, advice_text) values (18, 21, 2, 'Practice resilience in the face of setbacks');
+insert into advice (advice_id, user, role, advice_text) values (19, 11, 5, 'Build your personal brand and reputation early on');
+insert into advice (advice_id, user, role, advice_text) values (20, 8, 49, 'Don’t be afraid to ask for help collaboration is key');
+insert into advice (advice_id, user, role, advice_text) values (21, 20, 1, 'Be prepared to work hard and stay dedicated to your goals');
+insert into advice (advice_id, user, role, advice_text) values (22, 7, 29, 'Take the time to understand the company culture and align with it');
+insert into advice (advice_id, user, role, advice_text) values (23, 24, 39, 'Learn to balance work and life to avoid burnout');
+insert into advice (advice_id, user, role, advice_text) values (24, 38, 21, 'Volunteer for projects outside of your regular duties to gain more experience');
+insert into advice (advice_id, user, role, advice_text) values (25, 12, 4, 'Always strive for excellence but understand that perfection isn’t always achievable');
+insert into advice (advice_id, user, role, advice_text) values (26, 5, 48, 'Don’t shy away from difficult tasks tackle them head-on');
+insert into advice (advice_id, user, role, advice_text) values (27, 36, 26, 'Be patient success doesn’t happen overnight');
+insert into advice (advice_id, user, role, advice_text) values (28, 6, 46, 'Focus on developing both technical and soft skills');
+insert into advice (advice_id, user, role, advice_text) values (29, 17, 50, 'Don’t be afraid to take risks in your career');
+insert into advice (advice_id, user, role, advice_text) values (30, 5, 46, 'Be mindful of your professional image both online and offline');
+insert into advice (advice_id, user, role, advice_text) values (31, 18, 10, 'Understand that failure is part of the learning process');
+insert into advice (advice_id, user, role, advice_text) values (32, 27, 34, 'Seek out diverse experiences to broaden your perspective');
+insert into advice (advice_id, user, role, advice_text) values (33, 2, 49, 'Stay curious and never stop asking “why”');
+insert into advice (advice_id, user, role, advice_text) values (34, 33, 48, 'Learn how to negotiate effectively for your salary and benefits');
+insert into advice (advice_id, user, role, advice_text) values (35, 26, 28, 'Practice empathy and emotional intelligence in the workplace');
+insert into advice (advice_id, user, role, advice_text) values (36, 20, 36, 'Find ways to stay motivated when things get tough');
+insert into advice (advice_id, user, role, advice_text) values (37, 15, 10, 'Focus on long-term goals rather than short-term success');
+insert into advice (advice_id, user, role, advice_text) values (38, 39, 26, 'Keep track of your accomplishments and don’t be afraid to share them');
+insert into advice (advice_id, user, role, advice_text) values (39, 25, 38, 'Always be honest and transparent in your communication');
+insert into advice (advice_id, user, role, advice_text) values (40, 25, 15, 'Cultivate a positive attitude and approach challenges with optimism');
+insert into advice (advice_id, user, role, advice_text) values (41, 5, 10, 'Surround yourself with like-minded individuals who inspire you');
+insert into advice (advice_id, user, role, advice_text) values (42, 35, 36, 'Be willing to step outside of your comfort zone and try new things');
+insert into advice (advice_id, user, role, advice_text) values (43, 38, 33, 'Always be learning whether through formal education self-study or on-the-job experience');
+insert into advice (advice_id, user, role, advice_text) values (44, 29, 35, 'Understand the importance of work-life balance and prioritize self-care');
+insert into advice (advice_id, user, role, advice_text) values (45, 21, 30, 'Keep a journal of your professional development and progress');
+insert into advice (advice_id, user, role, advice_text) values (46, 37, 25, 'Always ask questions and seek clarity when needed');
+insert into advice (advice_id, user, role, advice_text) values (47, 2, 12, 'Build a strong network your connections can often be just as important as your skills');
+insert into advice (advice_id, user, role, advice_text) values (48, 2, 30, 'Stay up to date with the latest technologies and trends in your field');
+insert into advice (advice_id, user, role, advice_text) values (49, 32, 36, 'Don''t be afraid to fail learn from your mistakes and grow');
+insert into advice (advice_id, user, role, advice_text) values (50, 10, 5, 'Prioritize communication it’s just as important as technical skills');
 
 
 
