@@ -113,6 +113,48 @@ def add_notes(decisionmakerID):
     return make_response(jsonify({"message": "Note added"}), 200)
 
 
+@persona3.route('/notes/<int:decisionmakerID>/<int:noteID>', methods=['PUT'])
+def update_notes(decisionmakerID, noteID):
+    cursor = db.get_db().cursor()
+
+    # Extract the note details from the request body
+    note_text = request.json.get('note')
+    employer_id = request.json.get('employer_id', None)
+
+    # Check if the coordinator_id (decisionmakerID) exists in the coordinator table
+    cursor.execute('SELECT coordinator_id FROM coordinator WHERE coordinator_id = %s', (decisionmakerID,))
+    coordinator_data = cursor.fetchall()
+
+    if not coordinator_data:
+        return make_response(jsonify({"error": "Coordinator does not exist"}), 404)
+
+    # If employer_id is provided, check if it exists in the employer table
+    if employer_id:
+        cursor.execute('SELECT employer_id FROM employer WHERE employer_id = %s', (employer_id,))
+        employer_data = cursor.fetchall()
+
+        if not employer_data:
+            return make_response(jsonify({"error": "Employer does not exist"}), 404)
+
+    # Update the note in the notes table
+    query = '''
+        UPDATE notes
+        SET employer_id = %s, text = %s
+        WHERE note_id = %s
+    '''
+    data = (employer_id, note_text, noteID)
+    cursor.execute(query, data)
+
+    # Commit the transaction
+    db.get_db().commit()
+
+    return make_response(jsonify({"message": "Note updated"}), 200)
+
+
+
+
+
+
 @persona3.route('/ratings/<int:coordinatorID>', methods=['GET'])
 def get_ratings_by_coordinator(coordinatorID):
     cursor = db.get_db().cursor()
