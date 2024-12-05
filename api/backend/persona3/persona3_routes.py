@@ -152,6 +152,31 @@ def update_notes(decisionmakerID, noteID):
 
 
 
+@persona3.route('/notes/<int:decisionmakerID>/<int:noteID>', methods=['DELETE'])
+def delete_notes(decisionmakerID, noteID):
+    cursor = db.get_db().cursor()
+
+    # Check if the coordinator_id (decisionmakerID) exists in the coordinator table
+    cursor.execute('SELECT coordinator_id FROM coordinator WHERE coordinator_id = %s', (decisionmakerID,))
+    coordinator_data = cursor.fetchall()
+
+    if not coordinator_data:
+        return make_response(jsonify({"error": "Coordinator does not exist"}), 404)
+
+    # Delete the note from the notes table
+    query = '''
+        DELETE FROM notes
+        WHERE note_id = %s
+    '''
+    cursor.execute(query, (noteID,))
+
+    # Commit the transaction
+    db.get_db().commit()
+
+    return make_response(jsonify({"message": "Note deleted"}), 200)
+
+
+
 
 
 
