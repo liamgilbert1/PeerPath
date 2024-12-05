@@ -14,15 +14,15 @@ Use this page to add ratings on specific components of your co-op experience. Ea
 '''
 
 user_id = st.session_state['user_id']
-employer_id = st.text_input("Employer ID:")
+role_id = st.text_input("Role ID:")
 future_job_rating = st.text_input("Future Job Score:")
 work_quality_rating = st.text_input("Work Quality Score:")
 manager_rating = st.text_input("Manager Score:")
 salary_rating = st.text_input("Salary Score:")
 lifestyle_rating = st.text_input("Lifestyle Score:")
 
-def add_rating(user_id, employer_id):
-    if not employer_id or not employer_id.isdigit():
+def add_rating(user_id, role_id):
+    if not role_id or not role_id.isdigit():
         st.error("Invalid Employer ID. Please enter a numeric value.")
         return
     if not future_job_rating.isdigit():
@@ -43,8 +43,8 @@ def add_rating(user_id, employer_id):
 
     try:
         response = requests.post(
-            f'http://api:4000/p/users/{user_id}/ratings/{employer_id}',
-            json={"user_id": user_id},  # Send required data as JSON
+            f'http://api:4000/p/users/{user_id}/ratings/{role_id}',
+            json={"future_job_rating": future_job_rating, "work_quality_rating": work_quality_rating, "manager_rating": manager_rating, "salary_rating": salary_rating, "lifestyle_rating": lifestyle_rating},  # Send required data as JSON
         )
         if response.status_code == 200:
             st.success("Rating added successfully!")
@@ -59,4 +59,4 @@ def add_rating(user_id, employer_id):
 
 # Button to trigger the add_rating function
 if st.button("Add"):
-    add_rating(user_id, employer_id)
+    add_rating(user_id, role_id)
