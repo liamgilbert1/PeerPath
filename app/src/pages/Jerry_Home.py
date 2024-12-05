@@ -19,7 +19,7 @@ if st.button('View Roles',
              use_container_width=True):
   st.switch_page('pages/Job_list.py')
 
-if st.button('View World Map Demo', 
+if st.button('See Advice', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/Get_Advice.py')
