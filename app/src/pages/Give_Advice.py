@@ -27,7 +27,7 @@ def add_advice(role_id, advice, user_id):
 
     try:
         response = requests.post(
-            f'http://api:4000/c/advice/{role_id}',
+            f'http://api:4000/p/advice/{role_id}',
             json={"advice": advice, "user_id": user_id},  # Send required data as JSON
         )
         if response.status_code == 200:
@@ -45,21 +45,3 @@ def add_advice(role_id, advice, user_id):
 # Button to trigger the add_advice function
 if st.button("Add"):
     add_advice(role_id, advice, user_id)
-
-'''
-def add_advice(role_id):
-    try:
-        response = requests.post(
-        f'http://api:4000/c/role/{role_id}/advice',
-        )
-        if response.status_code == 200:
-            st.success("Advice added successfully!")
-        else:
-            st.error(f"Failed to add advice: {response.text}")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-
-# button to trigger the add advice function
-if st.button("Add"):
-    add_advice(role_id)
-'''
