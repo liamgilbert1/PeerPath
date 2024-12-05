@@ -149,7 +149,7 @@ def add_alert(adminID):
         return make_response(jsonify({"error": "Title field required"}), 400)
 
     sql_query = '''
-        INSERT INTO notes (user_id, title, description, recievers)
+        INSERT INTO system_alert (user_id, title, description, receivers)
             VALUES (%s, %s, %s, %s);
         '''
 

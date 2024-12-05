@@ -32,7 +32,7 @@ if st.button("Manage Requests",
 if st.button("View All System Alerts",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/System_alerts.py')
+  st.switch_page('pages/View_Alerts.py')
 
 if st.button("Create New Alert",
              type='primary',
