@@ -41,6 +41,10 @@ def ClassificationNav():
 
 
 # TODO - make page link for stacy
+def Persona3HomeNav():
+    st.sidebar.page_link(
+        "pages/Stacy_Home.py", label="Stacy's Home Page", icon="👤"
+    )
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
@@ -81,7 +85,7 @@ def SideBarLinks(show_home=False):
 
         # If the coordinator id is 1, show ___.
         if st.session_state["coordinator_id"] == 1:
-            AdminPageNav()
+            Persona3HomeNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
