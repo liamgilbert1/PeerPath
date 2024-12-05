@@ -1,6 +1,8 @@
-# Fall 2024 CS 3200 Project Template Repository
+# Fall 2024 CS 3200 Project: PeerPath
 
-This repo is a template for your semester project.  It includes most of the infrastructure setup (containers) and sample code and data throughout.  Explore it fully and ask questions.
+PeerPath is designed to make the process of co-op easier. Whether it's asking any questions you may have, finding unbiased opinions on co-op roles, or making reviews yourself, PeerPath has you covered! 
+
+PeerPath: an unfiltered network for professional development.
 
 ## Prerequisites
 
