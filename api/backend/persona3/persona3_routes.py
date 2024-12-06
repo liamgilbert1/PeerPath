@@ -61,7 +61,7 @@ def get_ratings():
     return the_response
 
 #------------------------------------------------------------
-# Retrieves all of the advice given based on the role
+# Retrieves all of the notes given on the coordinator or employer
 @persona3.route('/notes/<int:decisionmakerID>', methods=['GET'])
 def get_notes(decisionmakerID):
     cursor = db.get_db().cursor()
