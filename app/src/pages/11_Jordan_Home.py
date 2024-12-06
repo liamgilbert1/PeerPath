@@ -50,28 +50,28 @@ st.subheader("Advice and Resources")
 col1, col2 = st.columns(2)
 with col1:
     if st.button('Give Advice for Role', type='primary', use_container_width=True):
-        st.switch_page('pages/Give_Advice.py')
+        st.switch_page('pages/12_Give_Advice.py')
     if st.button('Add a Resource', type='primary', use_container_width=True):
-        st.switch_page('pages/Add_Resource.py')
+        st.switch_page('pages/13_Add_Resource.py')
 with col2:
     if st.button('Answer an Underclassman\'s Question', type='primary', use_container_width=True):
-        st.switch_page('pages/Answer_Question.py')
+        st.switch_page('pages/14_Answer_Question.py')
 
 st.write('')
 
 # Ratings Section
 st.subheader("Ratings")
 if st.button('Add a Rating', type='primary', use_container_width=True):
-    st.switch_page('pages/Add_Rating.py')
+    st.switch_page('pages/15_Add_Rating.py')
 
 st.write('')
 
 # Reviews Section
 st.subheader("Manage Reviews")
 if st.button('Add a Review', type='primary', use_container_width=True):
-    st.switch_page('pages/Add_Review.py')
+    st.switch_page('pages/16_Add_Review.py')
 if st.button('Manage Reviews', type='primary', use_container_width=True):
-    st.switch_page('pages/Manage_Reviews.py')
+    st.switch_page('pages/17_Manage_Reviews.py')
 
 st.write('')
 

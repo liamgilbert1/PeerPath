@@ -26,7 +26,7 @@ def Persona1HomeNav():
 ## -------------------------- Persona 2 ------------------------
 def Persona2HomeNav():
     st.sidebar.page_link(
-        "pages/Jordan_Home.py", label="Jordan's Home Page", icon="👤")
+        "pages/11_Jordan_Home.py", label="Jordan's Home Page", icon="👤")
 
 ## -------------------------- Persona 3 ------------------------
 def Persona3HomeNav():
