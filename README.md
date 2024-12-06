@@ -16,28 +16,28 @@ Jake Bernhard
 PeerPath is able to carry out a variety of functions for multiple user types. Some of our abilities include...
 
 Students:
-- View Co-op Roles
-- See & Give Advice
-- Find & Add Resources
-- View, Add, & Remove Friends
-- Employer Ratings & Reviews
-- Profile Settings
-- Add Ratings
-- Answer Common Questions
-- Add, Edit, & Delete Reviews
+- View Co-op Roles - Browse different co-op roles. See information that can be used to query advice.
+- See & Give Advice - Browse advice for different roles and offer advice.
+- Find & Add Resources - Look up peer username to find resources they have found useful. Can also add resources.
+- View, Add, & Remove Friends - See your friends and add and delete them.
+- Employer Ratings & Reviews - View quantitative ratings and qualitative reviews on various employers.
+- Profile Settings - Update username, email, activity status, urgency status, and search status.
+- Add Ratings - Add quantitative ratings for co-ops.
+- Answer Common Questions - Add answers to FAQs.
+- Add, Edit, & Delete Reviews - Add qualitative reviews for co-ops.
 
 Co-op Coordinators & Other Decision Makers:
-- Find & View Users
-- Retrieve Ratings
-- Manage Notes
+- Find & View Users - View all users and find one based on their username.
+- Retrieve Ratings - View all ratings and find ratings for specific coordinators.
+- Manage Notes - View, create, update, and delete collaborative notes.
 
 System Administrators:
-- View Hourly Activity
-- Manage User Permissions
-- Manage Requests
-- View & Create System Alerts
-- Manage Users
-- Manage Advice
+- View Hourly Activity - See all hourly activity.
+- Manage User Permissions - View, update, and delete user permissions.
+- Manage Requests - View, update, and delete help requests.
+- View & Create System Alerts - View all system alerts and create new ones.
+- Manage Users - View users and delete users who are inactive for long periods of time or conducting themselves dishonestly or inappropriately.
+- Manage Advice - View, find, and delete advice based on role and advice IDs.
 
 ## Personas
 
