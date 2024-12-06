@@ -155,3 +155,32 @@ if st.button("Delete Note"):
     else:
         st.error("Please enter a valid ID.")
 
+st.write('')
+st.write('')
+st.write("### All Coordinators")
+"""
+Use to find coordinator IDs.
+"""
+coordinator_data = {}
+try:
+  coordinator_data = requests.get('http://api:4000/3/coordinators').json()
+except:
+    st.write("**Important**: Could not connect to sample api, so using dummy data.")
+    coordinator_data = [{"a": "123", "b": "hello"}, {"a": "456", "b": "goodbye"}]
+st.dataframe(coordinator_data)
+
+st.write('')
+st.write('')
+st.write("### All Employers")
+"""
+Use to find employer IDs.
+"""
+
+employer_data = {}
+try:
+  employer_data = requests.get('http://api:4000/3/employers').json()
+except:
+    st.write("**Important**: Could not connect to sample api, so using dummy data.")
+    employer_data = [{"a": "123", "b": "hello"}, {"a": "456", "b": "goodbye"}]
+st.dataframe(employer_data)
+

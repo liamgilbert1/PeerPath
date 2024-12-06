@@ -216,3 +216,36 @@ def get_ratings_by_coordinator(coordinatorID):
     the_response.status_code = 200
     return the_response
 
+#------------------------------------------------------------
+# Retrieves all coordinators
+@persona3.route('/coordinators', methods=['GET'])
+def get_coordinators():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT activity_status, content, coordinator_id, email, first_name, last_name, satisfaction_score FROM coordinator')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "RIP"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+#------------------------------------------------------------
+# Retrieves all employers
+@persona3.route('/employers', methods=['GET'])
+def get_employers():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM employer')
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "RIP"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+
