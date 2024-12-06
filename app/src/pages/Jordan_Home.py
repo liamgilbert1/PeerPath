@@ -19,7 +19,7 @@ st.subheader("Job Opportunities")
 col1, col2 = st.columns(2)
 with col1:
     if st.button('View Roles', type='primary', use_container_width=True):
-        st.switch_page('pages/Job_list.py')
+        st.switch_page('pages/Job_List.py')
     if st.button('See Advice', type='primary', use_container_width=True):
         st.switch_page('pages/Get_Advice.py')
 with col2:
