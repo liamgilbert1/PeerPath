@@ -4,6 +4,13 @@ PeerPath is designed to make the process of co-op easier. Whether it's asking an
 
 PeerPath: an unfiltered network for professional development.
 
+## Team Members
+
+Liam Gilbert
+Joseph Carlucci
+Caroline Monaco
+Jake Bernhard
+
 ## Functionality
 
 PeerPath is able to carry out a variety of functions for multiple user types. Some of our abilities include...
