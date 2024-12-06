@@ -68,3 +68,8 @@ if st.button("Remove Friends",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/Remove_Friend.py')
+
+if st.button("Manage Reviews",
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Manage_Reviews.py')
