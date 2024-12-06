@@ -14,24 +14,8 @@ from backend.db_connection import db
 # routes.
 persona2 = Blueprint('persona2', __name__)
 
-
-# #------------------------------------------------------------
-# # Get specific user from the system
-# @persona2.route('/user/<int:userID>', methods=['GET'])
-# def get_user(userID):
-#     cursor = db.get_db().cursor()
-#     cursor.execute('SELECT * FROM user WHERE user_id = %s', (userID,))
-    
-#     theData = cursor.fetchall()
-    
-#     if not theData:
-#         return make_response(jsonify({"error": "RIP"}), 404)
-    
-#     the_response = make_response(jsonify(theData))
-#     the_response.status_code = 200
-#     return the_response
-
-'''
+# Get users that user is following
+# user/{userID}
 @persona2.route('user/<int:userID>', methods=['GET'])
 def get_following(userID):
     cursor = db.get_db().cursor()
@@ -45,20 +29,6 @@ def get_following(userID):
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
-'''
-
-'''
-Routes to make:
-- Add advice for roleID
-- Add resource for userID
-- Add rating for userID on employerID
-- Edit rating
-- Delete rating on employerID
-- Joe did: add friend
-- Joe did: delete friend
-- Add answer to question
-- Add new review
-'''
 
 # Add advice for roleID (post)
 # /advice/{roleID}
