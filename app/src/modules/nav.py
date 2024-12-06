@@ -55,6 +55,8 @@ def SideBarLinks(show_home=False):
     if show_home:
         # Show the Home page link (the landing page)
         HomeNav()
+        # Show the About page at the bottom of the list of links
+        AboutPageNav()
 
     # Show the other page navigators depending on the id of the user/coordinator/system admin
     if st.session_state["authenticated"]:
@@ -73,11 +75,7 @@ def SideBarLinks(show_home=False):
         # If the admin id is 1, show ___.
         if st.session_state["admin_id"] == 1:
             Persona4HomeNav()
-        
 
-
-    # Always show the About page at the bottom of the list of links
-    AboutPageNav()
 
     if st.session_state["authenticated"]:
         # Always show a logout button if there is a logged in user
