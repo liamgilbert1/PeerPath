@@ -62,7 +62,7 @@ if st.button('Act as Stacy, a co-op coordinator',
     # Add first name of user
     st.session_state['first_name'] = 'Stacy'
     # Switch to Stacy's home page
-    st.switch_page('pages/Stacy_Home.py')
+    st.switch_page('pages/18_Stacy_Home.py')
 
 if st.button('Act as Phil, a system administrator', 
             type = 'primary', 
@@ -74,4 +74,4 @@ if st.button('Act as Phil, a system administrator',
     # Add first name of user
     st.session_state['first_name'] = 'Phil'
     # Switch to Phil's home page
-    st.switch_page('pages/Phil_Home.py')
+    st.switch_page('pages/22_Phil_Home.py')

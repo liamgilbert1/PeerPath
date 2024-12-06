@@ -31,12 +31,12 @@ def Persona2HomeNav():
 ## -------------------------- Persona 3 ------------------------
 def Persona3HomeNav():
     st.sidebar.page_link(
-        "pages/Stacy_Home.py", label="Stacy's Home Page", icon="👤"
+        "pages/18_Stacy_Home.py", label="Stacy's Home Page", icon="👤"
     )
 
 #### ------------------------ Persona 4 ------------------------
 def Persona4HomeNav():
-    st.sidebar.page_link("pages/Phil_Home.py", label="Phil's Home Page", icon="🖥️")
+    st.sidebar.page_link("pages/22_Phil_Home.py", label="Phil's Home Page", icon="🖥️")
 
 
 # --------------------------------Links Function -----------------------------------------------
