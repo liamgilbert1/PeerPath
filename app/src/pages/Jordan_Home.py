@@ -14,6 +14,37 @@ st.write('')
 st.write('')
 st.write('### How can we help you on your co-op search?')
 
+# Job Opportunities Section
+st.subheader("Job Opportunities")
+col1, col2 = st.columns(2)
+with col1:
+    if st.button('View Roles', type='primary', use_container_width=True):
+        st.switch_page('pages/Job_list.py')
+    if st.button('See Advice', type='primary', use_container_width=True):
+        st.switch_page('pages/Get_Advice.py')
+with col2:
+    if st.button('Find Resources', type='primary', use_container_width=True):
+        st.switch_page('pages/Find_Resources.py')
+
+st.write('')
+
+# Employer Information Section
+st.subheader("Employer Information")
+col5, col6 = st.columns(2)
+with col5:
+    if st.button('Employer Ratings', type='primary', use_container_width=True):
+        st.switch_page('pages/See_Ratings.py')
+with col6:
+    if st.button('Employer Reviews', type='primary', use_container_width=True):
+        st.switch_page('pages/See_Reviews.py')
+
+st.write('')
+
+# Questions and Answers Section
+st.subheader("Questions and Answers")
+if st.button('Questions and Answers', type='primary', use_container_width=True):
+    st.switch_page('pages/Questions_And_Answers.py')
+
 # Advice and Resources Section
 st.subheader("Advice and Resources")
 col1, col2 = st.columns(2)
