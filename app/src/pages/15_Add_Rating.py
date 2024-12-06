@@ -10,7 +10,7 @@ SideBarLinks()
 st.write("# Add Rating")
 
 '''
-Use this page to add ratings on specific components of your co-op experience. Each rating is on a scale of 0-1 (overall score is on a scale of 0-5).
+Use this page to add ratings on specific components of your co-op experience. Each rating is on a scale of 1-10.
 '''
 
 user_id = st.session_state['user_id']
