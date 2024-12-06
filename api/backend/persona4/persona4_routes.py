@@ -55,7 +55,7 @@ def get_permissions():
 
 #------------------------------------------------------------
 # Update the permissions for user of <userID>
-@persona4.route('/<int:userID>/permissions', methods=['PUT'])
+@persona4.route('/permissions/<int:userID>', methods=['PUT'])
 def update_permissions(userID):
         permissions = request.json.get('user_permissions') 
         
