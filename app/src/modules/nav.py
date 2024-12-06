@@ -20,7 +20,7 @@ def AboutPageNav():
 #### ------------------------ Persona 1 ------------------------
 def Persona1HomeNav():
     st.sidebar.page_link(
-        "pages/Jerry_Home.py", label="Jerry's Home Page", icon="👤"
+        "pages/00_Jerry_Home.py", label="Jerry's Home Page", icon="👤"
     )
 
 ## -------------------------- Persona 2 ------------------------
