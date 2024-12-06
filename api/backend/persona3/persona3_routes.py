@@ -11,6 +11,8 @@ from backend.db_connection import db
 persona3 = Blueprint('persona3', __name__)
 
 
+#------------------------------------------------------------
+# Retrieves all of the users in the system
 @persona3.route('/users', methods=['GET'])
 def get_users():
     cursor = db.get_db().cursor()
@@ -25,6 +27,8 @@ def get_users():
     the_response.status_code = 200
     return the_response
 
+#------------------------------------------------------------
+# Retrieves a specific user from the system by username
 @persona3.route('/users/<string:username>', methods=['GET'])
 def get_user(username):
     cursor = db.get_db().cursor()
@@ -40,6 +44,8 @@ def get_user(username):
     return the_response
 
 
+#------------------------------------------------------------
+# Retrieves all of the ratings in the system
 @persona3.route('/ratings', methods=['GET'])
 def get_ratings():
     cursor = db.get_db().cursor()
@@ -54,6 +60,8 @@ def get_ratings():
     the_response.status_code = 200
     return the_response
 
+#------------------------------------------------------------
+# Retrieves all of the advice given based on the role
 @persona3.route('/notes/<int:decisionmakerID>', methods=['GET'])
 def get_notes(decisionmakerID):
     cursor = db.get_db().cursor()
@@ -90,8 +98,8 @@ def get_notes(decisionmakerID):
     the_response.status_code = 200
     return the_response
 
-
-
+#------------------------------------------------------------
+# Add a new note for a coordinator or employer
 @persona3.route('/notes/<int:decisionmakerID>', methods=['POST'])
 def add_notes(decisionmakerID):
     cursor = db.get_db().cursor()
@@ -122,8 +130,8 @@ def add_notes(decisionmakerID):
     db.get_db().commit()
     return make_response(jsonify({"message": "Note added successfully"}), 200)
 
-
-
+#------------------------------------------------------------
+# Update a note for a coordinator or employer
 @persona3.route('/notes/<int:decisionmakerID>/<int:noteID>', methods=['PUT'])
 def update_notes(decisionmakerID, noteID):
     cursor = db.get_db().cursor()
@@ -156,8 +164,8 @@ def update_notes(decisionmakerID, noteID):
     db.get_db().commit()
     return make_response(jsonify({"message": "Note updated successfully"}), 200)
 
-
-
+#------------------------------------------------------------
+# Delete a note for a coordinator or employer
 @persona3.route('/notes/<int:decisionmakerID>/<int:noteID>', methods=['DELETE'])
 def delete_notes(decisionmakerID, noteID):
     cursor = db.get_db().cursor()
@@ -186,13 +194,13 @@ def delete_notes(decisionmakerID, noteID):
     db.get_db().commit()
     return make_response(jsonify({"message": "Note deleted successfully"}), 200)
 
-
-
+#------------------------------------------------------------
+# Retrieves all of the ratings in the system by coordinator
 @persona3.route('/ratings/<int:coordinatorID>', methods=['GET'])
 def get_ratings_by_coordinator(coordinatorID):
     cursor = db.get_db().cursor()
     sql_query = '''
-        SELECT * 
+        SELECT future_job_score, lifestyle_score, manager_score, rating_id, role_id, salary_score, user.user_id, work_quality_score
         FROM rating 
         JOIN user ON rating.user_id = user.user_id 
         WHERE user.coordinator = %s;'''
