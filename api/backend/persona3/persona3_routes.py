@@ -21,7 +21,7 @@ def get_users():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -37,7 +37,7 @@ def get_user(username):
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -54,7 +54,7 @@ def get_ratings():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -210,7 +210,7 @@ def get_ratings_by_coordinator(coordinatorID):
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -226,7 +226,7 @@ def get_coordinators():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -242,7 +242,7 @@ def get_employers():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200

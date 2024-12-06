@@ -28,7 +28,7 @@ def get_hourly_acitivty():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -45,7 +45,7 @@ def get_permissions():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -87,7 +87,7 @@ def get_help_requests():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -147,7 +147,7 @@ def get_alerts():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -189,7 +189,7 @@ def get_user():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -216,7 +216,7 @@ def get_advice():
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Unsuccessful"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200

@@ -23,7 +23,7 @@ def get_user(userID):
     theData = cursor.fetchall()
     
     if not theData:
-        return make_response(jsonify({"error": "RIP"}), 404)
+        return make_response(jsonify({"error": "Failed to fetch data"}), 404)
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
