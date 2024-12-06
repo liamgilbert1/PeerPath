@@ -40,7 +40,7 @@ if st.button("Act as Jerry, a 2nd year student searching for his 1st co-op",
     logger.info("Logging in as Jerry (First Time Co-op Persona)")
     st.switch_page('pages/00_Jerry_Home.py')
 
-if st.button('Act as Jordan, a 4th year student finishing his second co-op', 
+if st.button('Act as Jordan, a 4th year student finishing his 2nd co-op', 
             type = 'primary', 
             use_container_width=True):
     # Change authentication to True (user is now "logged in")
