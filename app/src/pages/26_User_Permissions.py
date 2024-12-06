@@ -38,7 +38,7 @@ update_choice = st.selectbox("Set status to:", ["Classic", "Reduced", "Advanced"
 def update_permissions(user_id, choice):
     try:
         response = requests.put(
-            f'http://api:4000/4/{user_id}/permissions',
+            f'http://api:4000/4/permissions/{user_id}',
             json={"user_permissions": choice.lower()}
         )
         if response.status_code == 200:
