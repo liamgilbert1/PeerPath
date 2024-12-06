@@ -213,3 +213,48 @@ def get_questions():
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
+
+# #------------------------------------------------------------
+# Get reviews by {userID}
+@persona2.route('/reviews/<int:userID>', methods=['GET'])
+def get_user_reviews(userID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT title AS Role, comment AS Review, review_id AS "Review ID" FROM review re JOIN role ro ON re.role_id = ro.role_id WHERE re.user_id = %s', (userID,))
+    
+    theData = cursor.fetchall()
+    
+    if not theData:
+        return make_response(jsonify({"error": "Failed to retrieve reviews for the user"}), 404)
+    
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
+
+# #------------------------------------------------------------
+# Update review of review_id
+@persona2.route('/review/<int:review_id>', methods=['PUT'])
+def edit_user_review(review_id):
+    cursor = db.get_db().cursor()
+    data = request.get_json()
+
+    if not data or 'review' not in data:
+        return make_response(jsonify({"error": "Invalid input data"}), 400)
+    
+    cursor.execute('UPDATE review SET comment = %s WHERE review_id = %s', (data['review'], review_id))
+    
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Review updated successfully"}), 200)
+
+# #------------------------------------------------------------
+# Delete review of review_id
+@persona2.route('/review/<int:review_id>', methods=['DELETE'])
+def delete_user_review(review_id):
+    cursor = db.get_db().cursor()
+    
+    cursor.execute('DELETE FROM review WHERE review_id = %s', (review_id,))
+    
+    if cursor.rowcount == 0:
+        return make_response(jsonify({"error": "No matching review found to delete"}), 404)
+    
+    db.get_db().commit()
+    return make_response(jsonify({"message": "Review deleted successfully"}), 200)
