@@ -192,7 +192,7 @@ def delete_notes(decisionmakerID, noteID):
 def get_ratings_by_coordinator(coordinatorID):
     cursor = db.get_db().cursor()
     sql_query = '''
-        SELECT * 
+        SELECT future_job_score, lifestyle_score, manager_score, rating_id, role_id, salary_score, user.user_id, work_quality_score
         FROM rating 
         JOIN user ON rating.user_id = user.user_id 
         WHERE user.coordinator = %s;'''
