@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS notes (
     coordinator_id int,
     note_text varchar(500) not null,
     CONSTRAINT fk_notes_user
-        FOREIGN KEY (user_id) REFERENCES user (user_id)
+        FOREIGN KEY (user_id) REFERENCES coordinator (coordinator_id)
             ON UPDATE cascade ON DELETE cascade ,
     CONSTRAINT fk_notes_employer
         FOREIGN KEY (employer_id) REFERENCES employer (employer_id)
@@ -466,7 +466,7 @@ insert into coordinator (coordinator_id, admin_id, first_name, last_name, email,
 
 insert into user (user_id, first_name, last_name, username, email, student_type, coordinator, admin, activity_status, urgency_status, search_status, user_permissions) values (1, 'Jerry', 'Prais', 'jprais10', 'jprais0@yellowbook.com', 'Sophomore', 1, 8, 'offline', 'not urgent', 'applying', 'classic');
 insert into user (user_id, first_name, last_name, username, email, student_type, coordinator, admin, activity_status, urgency_status, search_status, user_permissions) values (2, 'Jordan', 'Sman', 'jsman01', 'jsman01@wsj.com', 'Senior', 20, 14, 'online', 'not urgent', 'on co-op', 'classic');
-insert into user (user_id, first_name, last_name, username, email, student_type, coordinator, admin, activity_status, urgency_status, search_status, user_permissions) values (3, 'Ira', 'Giacoppoli', 'igiacoppoli2', 'igiacoppoli2@toplist.cz', 'Freshman', 20, 15, 'offline', 'not urgent', 'job found', 'classic');
+insert into user (user_id, first_name, last_name, username, email, student_type, coordinator, admin, activity_status, urgency_status, search_status, user_permissions) values (3, 'Mark', 'Fontenot', 'best_teacher_ever_100', 'mfontenot@northeastern.edu', 'Freshman', 20, 15, 'offline', 'not urgent', 'job found', 'classic');
 insert into user (user_id, first_name, last_name, username, email, student_type, coordinator, admin, activity_status, urgency_status, search_status, user_permissions) values (4, 'Paige', 'Yeliashev', 'pyeliashev3', 'pyeliashev3@gizmodo.com', 'Freshman', 30, 19, 'offline', 'semi-urgent', 'next cycle applicant', 'advanced');
 insert into user (user_id, first_name, last_name, username, email, student_type, coordinator, admin, activity_status, urgency_status, search_status, user_permissions) values (5, 'Friedrick', 'Faint', 'ffaint4', 'ffaint4@bluehost.com', 'Senior', 8, 18, 'offline', 'not urgent', 'next cycle applicant', 'classic');
 insert into user (user_id, first_name, last_name, username, email, student_type, coordinator, admin, activity_status, urgency_status, search_status, user_permissions) values (6, 'Elane', 'Curphey', 'ecurphey5', 'ecurphey5@bloglines.com', 'Sophomore', 22, 6, 'online', 'not urgent', 'job found', 'reduced');
@@ -1106,16 +1106,16 @@ insert into friendship (user_id, friend_id) values (18, 26);
 insert into friendship (user_id, friend_id) values (24, 31);
 insert into friendship (user_id, friend_id) values (8, 12);
 
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (1, 22, 40, 27, 'I was able to apply theoretical knowledge to practical situations which enhanced my learning');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (1, 22, null, 27, 'I was able to apply theoretical knowledge to practical situations which enhanced my learning');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (2, 12, 24, null, 'My advisor provided excellent mentorship and helped me set achievable career goals');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (3, 27, 6, 2, 'My advisor encouraged me to take ownership of my projects and responsibilities');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (3, 27, null, 2, 'My advisor encouraged me to take ownership of my projects and responsibilities');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (4, 24, null, 14, 'My advisor provided excellent mentorship and helped me set achievable career goals');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (5, 6, 13, 31, 'I learned how to use version control tools like Git in a real-world project');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (5, 6, 13,  null, 'I learned how to use version control tools like Git in a real-world project');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (6, 23, null, 11, 'I was able to work on projects that aligned with my long-term career goals');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (7, 33, 9, null, 'I was able to improve my time management skills by handling multiple tasks');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (8, 17, 13, 25, 'I was able to imThe internship provided valuable hands-on experience in a real-world setting');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (9, 28, 6, null, 'The advisor’s guidance helped me improve my communication skills in a professional setting');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (10, 22, 20, 9, 'The internship helped me refine my problem-solving and critical thinking skills');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (10, 22, null, 9, 'The internship helped me refine my problem-solving and critical thinking skills');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (11, 27, 8, null, 'The internship taught me how to navigate challenges in a professional environment');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (12, 38, 40, null, 'I had the chance to participate in team meetings and contribute ideas');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (13, 18, 12, null, 'The advisor’s guidance helped me improve my communication skills in a professional setting');
@@ -1124,7 +1124,7 @@ insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) val
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (16, 8, 7, null, 'I learned how to use version control tools like Git in a real-world project');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (17, 29, 31, 29, 'My advisor encouraged me to take ownership of my projects and responsibilities');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (18, 28, 38, null, 'The advisor helped me navigate office politics and professional relationships');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (19, 31, 14, 19, 'I learned how to use version control tools like Git in a real-world project');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (19, 31, null, 19, 'I learned how to use version control tools like Git in a real-world project');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (20, 27, 15, null, 'The advisor was very supportive and provided useful feedback on my progress');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (21, 20, 26, 29, 'The advisor provided constructive feedback that helped me improve my performance');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (22, 26, 7, null, 'The advisor was very supportive and provided useful feedback on my progress');
@@ -1135,25 +1135,25 @@ insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) val
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (27, 26, 26, null, 'My advisor encouraged me to take ownership of my projects and responsibilities');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (28, 34, 33, null, 'I was able to apply theoretical knowledge to practical situations which enhanced my learning');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (29, 20, 7, null, 'The advisor helped me stay focused and motivated through challenging tasks');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (30, 24, 34, 27, 'I gained exposure to new technologies that I hadn''t worked with before');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (31, 21, 24, 22, 'I gained exposure to new technologies that I hadn''t worked with before');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (32, 11, 14, 39, 'The internship provided me with a clearer understanding of my career direction');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (30, 24, 34, null, 'I gained exposure to new technologies that I hadn''t worked with before');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (31, 21, null, 22, 'I gained exposure to new technologies that I hadn''t worked with before');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (32, 11, null, 39, 'The internship provided me with a clearer understanding of my career direction');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (33, 38, 2, null, 'The advisor was very supportive and provided useful feedback on my progress');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (34, 20, null, 2, 'The internship helped me refine my problem-solving and critical thinking skills');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (35, 22, 21, 39, 'I was able to improve my time management skills by handling multiple tasks');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (36, 32, null, null, 'My advisor encouraged me to take ownership of my projects and responsibilities');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (37, 30, 11, 24, 'The internship provided valuable hands-on experience in a real-world setting');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (38, 22, 11, 10, 'I learned the importance of documentation in software development');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (37, 30, null, 24, 'The internship provided valuable hands-on experience in a real-world setting');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (38, 22, 11, null, 'I learned the importance of documentation in software development');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (39, 31, null, 29, 'I learned how to use version control tools like Git in a real-world project');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (40, 7, 7, null, 'I received helpful advice on how to tailor my resume and LinkedIn profile for the industry');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (41, 17, 34, 4, 'The advisor helped me navigate office politics and professional relationships');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (42, 31, 23, 21, 'I gained exposure to new technologies that I hadn''t worked with before');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (41, 17, null, 4, 'The advisor helped me navigate office politics and professional relationships');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (42, 31, 23, null, 'I gained exposure to new technologies that I hadn''t worked with before');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (43, 29, 27, null, 'My advisor provided excellent mentorship and helped me set achievable career goals');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (44, 21, 6, 21, 'I learned the significance of collaboration and knowledge-sharing within teams');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (44, 21, null, 21, 'I learned the significance of collaboration and knowledge-sharing within teams');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (45, 8, 18, null, 'I gained exposure to new technologies that I hadn''t worked with before');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (46, 27, 30, 37, 'I learned how to handle constructive criticism in a positive and professional manner');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (46, 27, null, 37, 'I learned how to handle constructive criticism in a positive and professional manner');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (47, 33, 28, null, 'I gained exposure to new technologies that I hadn''t worked with before');
-insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (48, 1, 21, 30, 'I was able to apply theoretical knowledge to practical situations which enhanced my learning');
+insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (48, 1, null, 30, 'I was able to apply theoretical knowledge to practical situations which enhanced my learning');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (49, 17, 29, null, 'I had the opportunity to present my work to senior leaders and gain valuable feedback');
 insert into notes (note_id, user_id, employer_id, coordinator_id, note_text) values (50, 18, 9, null, 'The internship provided valuable hands-on experience in a real-world setting');
 
