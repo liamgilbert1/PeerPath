@@ -163,7 +163,7 @@ def add_review(userID):
     if not data or 'review' not in data:
 
         return make_response(jsonify({"error": "Invalid input data"}), 400)
-    cursor.execute('INSERT INTO review (user_id, review) VALUES (%s, %s)', (userID, data['review']))
+    cursor.execute('INSERT INTO review (user_id, comment, role_id) VALUES (%s, %s, %s)', (userID, data['review'], data['role_id']))
 
     db.get_db().commit()
     return make_response(jsonify({"message": "Review added successfully"}), 200)
