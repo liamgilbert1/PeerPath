@@ -12,9 +12,9 @@ persona4 = Blueprint('persona4', __name__)
 
 
 #------------------------------------------------------------
-# Retrieves all hourly acitivty in the system
+# Retrieves all hourly activity in the system
 @persona4.route('/hourlyactivity', methods=['GET'])
-def get_hourly_acitivty():
+def get_hourly_activity():
     cursor = db.get_db().cursor()
    
     
