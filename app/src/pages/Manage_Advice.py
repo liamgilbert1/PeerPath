@@ -71,6 +71,22 @@ def delete_advice(advice_id):
 
 if st.button("Delete Advice"):
     delete_advice(delete_advice_id)
+
+st.write('')
+st.write('')
+st.write("### All Roles")
+"""
+Use to find role IDs.
+"""
+data = {} 
+try:
+  user_id = 2
+  data = requests.get(f'http://api:4000/c/roles').json()
+except:
+  st.write("**Important**: Could not connect to sample api, so using dummy data.")
+  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+
+st.dataframe(data)
  
  
 
