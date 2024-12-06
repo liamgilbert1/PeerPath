@@ -11,6 +11,8 @@ from backend.db_connection import db
 persona4 = Blueprint('persona4', __name__)
 
 
+#------------------------------------------------------------
+# Retrieves all hourly acitivty in the system
 @persona4.route('/hourlyactivity', methods=['GET'])
 def get_hourly_acitivty():
     cursor = db.get_db().cursor()
@@ -33,6 +35,8 @@ def get_hourly_acitivty():
     return the_response
 
 
+#------------------------------------------------------------
+# Retrieves all users and their permissions in the system
 @persona4.route('/user/permissions', methods=['GET'])
 def get_permissions():
     cursor = db.get_db().cursor()
@@ -49,7 +53,8 @@ def get_permissions():
 
 
 
-# Update permissionms for {userID}
+#------------------------------------------------------------
+# Update the permissions for user of <userID>
 @persona4.route('/<int:userID>/permissions', methods=['PUT'])
 def update_permissions(userID):
         permissions = request.json.get('user_permissions') 
@@ -72,6 +77,8 @@ def update_permissions(userID):
 
 
 
+#------------------------------------------------------------
+# Retrieves all help requests in the system
 @persona4.route('/helprequest', methods=['GET'])
 def get_help_requests():
     cursor = db.get_db().cursor()
@@ -86,6 +93,9 @@ def get_help_requests():
     the_response.status_code = 200
     return the_response
 
+
+#------------------------------------------------------------
+# Update the status for request of <requestID> in the system 
 @persona4.route('/helprequest/<int:requestID>', methods=['PUT'])
 def update_status(requestID):
     cursor = db.get_db().cursor()
@@ -107,6 +117,10 @@ def update_status(requestID):
     db.get_db().commit()
     return make_response(jsonify({"message": "Status updated successfully"}), 200)
 
+
+
+#------------------------------------------------------------
+# Delete the request of <requestID> in the system 
 @persona4.route('/helprequest/<int:requestID>', methods=['DELETE'])
 def delete_request(requestID):
     cursor = db.get_db().cursor()
@@ -122,6 +136,9 @@ def delete_request(requestID):
     return make_response(jsonify({"message": "Request deleted successfully"}), 200)
 
 
+
+#------------------------------------------------------------
+# Retrieve all system alerts that have been posted in the system
 @persona4.route('/systemalert', methods=['GET'])
 def get_alerts():
     cursor = db.get_db().cursor()
@@ -136,6 +153,9 @@ def get_alerts():
     the_response.status_code = 200
     return the_response
 
+
+#------------------------------------------------------------
+# Post a new system alert to the system 
 @persona4.route('/systemalert/<int:adminID>', methods=['POST'])
 def add_alert(adminID):
     cursor = db.get_db().cursor()
@@ -159,6 +179,8 @@ def add_alert(adminID):
     return make_response(jsonify({"message": "Alert posted successfully"}), 200)
 
 
+#------------------------------------------------------------
+# Retrieve all users in the system
 @persona4.route('/users', methods=['GET'])
 def get_user():
     cursor = db.get_db().cursor()
@@ -173,6 +195,9 @@ def get_user():
     the_response.status_code = 200
     return the_response
 
+
+#------------------------------------------------------------
+# Delete user of <userID> from the system
 @persona4.route('/users/<int:userID>', methods=['DELETE'])
 def delete_user(userID):
     cursor = db.get_db().cursor()
@@ -180,6 +205,9 @@ def delete_user(userID):
     db.get_db().commit()
     return make_response(jsonify({"message": "User deleted successfully"}), 200)
 
+
+#------------------------------------------------------------
+# Retrieve all advice in the system
 @persona4.route('/advice', methods=['GET'])
 def get_advice():
     cursor = db.get_db().cursor()
@@ -195,6 +223,8 @@ def get_advice():
     return the_response
 
 
+#------------------------------------------------------------
+# Retrieve advice given for role of <roleID> from the system
 @persona4.route('/advice/<int:roleID>', methods=['GET'])
 def get_role_advice(roleID):
     cursor = db.get_db().cursor()
@@ -211,6 +241,8 @@ def get_role_advice(roleID):
 
 
 
+#------------------------------------------------------------
+# Delete advice of <adviceID> from the system
 @persona4.route('/advice/<int:adviceID>', methods=['DELETE'])
 def delete_advice(adviceID):
     cursor = db.get_db().cursor()
